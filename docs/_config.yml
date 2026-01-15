@@ -1,0 +1,7 @@
+title: My Home Lab Documentation
+description: Documentation for my home lab CI/CD setup
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag

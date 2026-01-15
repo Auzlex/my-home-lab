@@ -1,3 +1,5 @@
+[← Back to Home](index.md)
+
 # LORIC - Orchestration Node (Gitea Runner)
 
 **Hostname:** LORIC  

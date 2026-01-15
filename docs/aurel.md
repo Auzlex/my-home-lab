@@ -1,3 +1,5 @@
+[← Back to Home](index.md)
+
 ## AUREL – Execution Node (Docker)
 
 **Hostname:** AUREL

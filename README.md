@@ -1,7 +1,9 @@
 # My Home Lab
 
-Documentation lives here:
+Welcome to the My Home Lab repository. This repo contains configurations and infrastructure documentation for my home lab, including my CI/CD setup.
 
-https://auzlex.github.io/my-home-lab/
+## Documentation
 
-This repo contains configs and infrastructure documentation for my homelab including my CI/CD setup.
+For detailed documentation, please visit the [GitHub Pages site](https://auzlex.github.io/my-home-lab/).
+
+The documentation includes setup guides, configurations, and architecture details for the home lab infrastructure.
