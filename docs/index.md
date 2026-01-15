@@ -46,6 +46,12 @@ The goal is to mirror real-world CI infrastructure on low-cost hardware.
   display: block;
   width: 80%;
   max-width: 700px;
+  cursor: grab;
+  transform-origin: 0 0;
+}
+
+.modal-content:active {
+  cursor: grabbing;
 }
 
 .close {
@@ -73,19 +79,64 @@ var img = document.getElementById('architecture-image');
 var modalImg = document.getElementById('modal-image');
 var span = document.getElementsByClassName('close')[0];
 
+var scale = 1;
+var panning = false;
+var pointX = 0;
+var pointY = 0;
+var start = { x: 0, y: 0 };
+
 img.onclick = function(){
   modal.style.display = 'block';
   modalImg.src = this.src;
+  resetZoom();
 }
 
 span.onclick = function() {
   modal.style.display = 'none';
+  resetZoom();
 }
 
 modal.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = 'none';
+    resetZoom();
   }
+}
+
+function resetZoom() {
+  scale = 1;
+  pointX = 0;
+  pointY = 0;
+  modalImg.style.transform = 'translate(0px, 0px) scale(1)';
+}
+
+modalImg.onwheel = function(event) {
+  event.preventDefault();
+  var xs = (event.clientX - pointX) / scale;
+  var ys = (event.clientY - pointY) / scale;
+  var delta = (event.wheelDelta ? event.wheelDelta : -event.deltaY);
+  (delta > 0) ? (scale *= 1.2) : (scale /= 1.2);
+  pointX = event.clientX - xs * scale;
+  pointY = event.clientY - ys * scale;
+  modalImg.style.transform = 'translate(' + pointX + 'px, ' + pointY + 'px) scale(' + scale + ')';
+}
+
+modalImg.onmousedown = function(event) {
+  event.preventDefault();
+  panning = true;
+  start = { x: event.clientX - pointX, y: event.clientY - pointY };
+}
+
+modalImg.onmouseup = function() {
+  panning = false;
+}
+
+modalImg.onmousemove = function(event) {
+  event.preventDefault();
+  if (!panning) return;
+  pointX = (event.clientX - start.x);
+  pointY = (event.clientY - start.y);
+  modalImg.style.transform = 'translate(' + pointX + 'px, ' + pointY + 'px) scale(' + scale + ')';
 }
 </script>
 
