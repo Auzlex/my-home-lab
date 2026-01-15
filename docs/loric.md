@@ -1,4 +1,4 @@
-<link rel="icon" href="favicon.ico">
+<link rel="icon" href="resources/favicon.ico">
 
 [← Back to Home](index.md)
 

@@ -1,3 +1,4 @@
+<link rel="icon" href="resources/favicon.ico">
 
 # Home Lab CI/CD
 
