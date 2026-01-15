@@ -12,6 +12,22 @@
 It is responsible for polling the Gitea server on CASPER, orchestrating workflow execution,
 and dispatching jobs to worker nodes like AUREL while maintaining workflow scheduling and coordination.
 
+### System Information
+
+**Kernel / OS**
+- Kernel: 6.12.62+rpt-rpi-v8
+- Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18)
+- Architecture: aarch64
+- Distro: Debian (Raspberry Pi variant)
+
+**SSH Stack**
+- OpenSSH: OpenSSH_10.0p2 Debian-7
+- OpenSSL: 3.5.4 (30 Sep 2025)
+
+**Docker**
+- Docker Engine: 26.1.5+dfsg1
+- Build: a72d7cd
+
 ## Setup Steps
 **LORIC** was setup using the following steps and instructions:
 

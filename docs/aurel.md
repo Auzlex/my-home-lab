@@ -12,6 +12,22 @@
 It is responsible for executing all heavy build and test workloads, keeping orchestration
 and scheduling separate from execution.
 
+### System Information
+
+**Kernel / OS**
+- Kernel: 6.12.62+rpt-rpi-v8
+- Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18)
+- Architecture: aarch64
+- Distro: Debian (Raspberry Pi variant)
+
+**SSH Stack**
+- OpenSSH: OpenSSH_10.0p2 Debian-7
+- OpenSSL: 3.5.4 (30 Sep 2025)
+
+**Docker**
+- Docker Engine: 26.1.5+dfsg1
+- Build: a72d7cd
+
 ---
 
 ### Role in the CI/CD System
