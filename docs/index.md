@@ -1,4 +1,4 @@
-<link rel="icon" href="resources/favicon.ico">
+<link rel="icon" href="https://auzlex.github.io/my-home-lab/resources/favicon.ico">
 
 # Home Lab CI/CD
 
