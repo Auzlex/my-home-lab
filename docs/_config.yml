@@ -5,5 +5,5 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
-include:
-  - head.html
+include: 
+  - _includes
