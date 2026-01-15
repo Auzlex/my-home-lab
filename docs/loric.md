@@ -2,10 +2,10 @@
 
 # LORIC - Orchestration Node (Gitea Runner)
 
-**Hostname:** LORIC  
-**Type:** Raspberry Pi 3 B+
-**IP Address:** 192.168.1.122 **(STATIC)**
-**Architecture:** ARMv7 (Raspberry Pi 3 B+)  
+* **Hostname:** LORIC  
+* **Type:** Raspberry Pi 3 B+
+* **IP Address:** 192.168.1.122 **(STATIC)**
+* **Architecture:** ARMv7 (Raspberry Pi 3 B+)  
 
 ### Purpose
 **LORIC** acts as the dedicated **CI/CD runner node** within the home-lab CI/CD infrastructure.
@@ -123,7 +123,7 @@ auzlex@LORIC:~ $ sudo systemctl status gitea-runner
 
 We will test running a task on LORIC to `echo "Hello from AUREL!"`
 
-![alt text](image.png)
+![alt text](resources/image.png)
 In the example image above, you can see the worker is successfully running my gitea workflow test.yml within my CICD-Test repo. The test.yml is to instruct commands under the ssh.
 
 ```yml

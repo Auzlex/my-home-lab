@@ -2,9 +2,9 @@
 
 # CASPER - Central Gitea Server
 
-**Hostname:** CASPER
-**IP Address:** 192.168.1.124 **(STATIC)**
-**Architecture:** x86-64 (OpenMediaVault Server)
+* **Hostname:** CASPER
+* **IP Address:** 192.168.1.124 **(STATIC)**
+* **Architecture:** x86-64 (OpenMediaVault Server)
 
 ### Purpose
 
