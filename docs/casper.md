@@ -1,3 +1,5 @@
+<link rel="icon" href="favicon.ico">
+
 [← Back to Home](index.md)
 
 # CASPER - Central Gitea Server

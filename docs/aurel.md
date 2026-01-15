@@ -1,3 +1,5 @@
+<link rel="icon" href="favicon.ico">
+
 [← Back to Home](index.md)
 
 ## AUREL – Execution Node (Docker)

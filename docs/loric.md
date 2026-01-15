@@ -1,3 +1,5 @@
+<link rel="icon" href="favicon.ico">
+
 [← Back to Home](index.md)
 
 # LORIC - Orchestration Node (Gitea Runner)
