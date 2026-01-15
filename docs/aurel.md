@@ -2,9 +2,9 @@
 
 ## AUREL – Execution Node (Docker)
 
-**Hostname:** AUREL
-**IP Address:** 192.168.1.123 **(STATIC)**
-**Architecture:** ARMv7 (Raspberry Pi 3 B+)
+* **Hostname:** AUREL
+* **IP Address:** 192.168.1.123 **(STATIC)**
+* **Architecture:** ARMv7 (Raspberry Pi 3 B+)
 
 ### Purpose
 
