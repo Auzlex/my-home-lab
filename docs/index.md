@@ -1,5 +1,4 @@
-<link rel="shortcut icon" type="image/png" 
-      href="{{ "/docs/favicon.png"  | absolute_url }}">
+<link rel="shortcut icon" type="image/ico" href="favicon.ico">
 
 
 # Home Lab CI/CD
