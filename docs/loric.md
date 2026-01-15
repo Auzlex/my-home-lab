@@ -1,4 +1,3 @@
-<link rel="icon" href="https://auzlex.github.io/my-home-lab/resources/favicon.ico">
 
 [← Back to Home](index.md)
 
