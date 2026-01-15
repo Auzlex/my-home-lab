@@ -1,7 +1,6 @@
 title: My Home Lab Documentation
 description: Documentation for my home lab CI/CD setup
 theme: jekyll-theme-minimal
-favicon: favicon.ico
 plugins:
   - jekyll-feed
   - jekyll-sitemap
