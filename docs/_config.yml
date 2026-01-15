@@ -6,4 +6,4 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 include: 
-  - _includes
+  - _includes/head.html
