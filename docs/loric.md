@@ -8,7 +8,7 @@
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)  
 
 ### Purpose
-**LORIC** acts as the dedicated **CI/CD runner node** within the home-lab CI/CD infrastructure.
+**LORIC** acts as the dedicated **runner node** within the home-lab CI/CD infrastructure.
 It is responsible for polling the Gitea server on CASPER, orchestrating workflow execution,
 and dispatching jobs to worker nodes like AUREL while maintaining workflow scheduling and coordination.
 

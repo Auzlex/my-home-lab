@@ -8,7 +8,7 @@
 
 ### Purpose
 
-**AUREL** acts as a dedicated **CI build worker** within the home-lab CI/CD infrastructure.
+**AUREL** acts as a dedicated **build worker** within the home-lab CI/CD infrastructure.
 It is responsible for executing all heavy build and test workloads, keeping orchestration
 and scheduling separate from execution.
 
