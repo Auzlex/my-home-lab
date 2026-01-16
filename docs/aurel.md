@@ -70,7 +70,20 @@ and scheduling separate from execution.
 * Runs Docker commands
 * Receives remote jobs via SSH from LORIC
 
-### Setup Steps Verified for Raspberry Pi OS
+## Setup Steps
+**AUREL** was setup using the following steps and instructions:
+
+### 1. Install Docker
+
+```bash
+auzlex@LORIC:~ $ sudo apt update && sudo apt install -y docker.io docker-compose && sudo systemctl enable docker --now
+```
+
+* Docker is used to run any containerized jobs dispatched from **LORIC**.
+
+### 2. Setup SSH For Isolated CI user
+
+This user account will be used to run ssh commands dispatched by **LORIC**. To maintain isolation.
 
 1. Create user with password and set shell (choose a strong password, record it for SSH key setup):
 
@@ -117,17 +130,10 @@ ssh ci@192.168.1.123
 ls -ld /home/ci
 ```
 
-8. Prepare CI workspace ownership:
-
-```bash
-sudo mkdir -p /srv/ci && sudo chown -R ci:ci /srv/ci
-```
-
 ### Notes
 
 * Ensure SSH key is generated for `ci` to allow LORIC to execute jobs without prompting for a password
 * Password must be set initially for key setup
-* Workspace `/srv/ci` should be owned by `ci` for proper job isolation
 * No sudo access is required unless a workflow explicitly needs it
 
 ---

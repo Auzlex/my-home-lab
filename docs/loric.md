@@ -10,7 +10,7 @@
 
 ### Purpose
 **LORIC** acts as the dedicated **runner node** within the home-lab CI/CD infrastructure.
-It is responsible for polling the Gitea server on CASPER, orchestrating workflow execution,
+It is responsible for polling the Gitea server on **CASPER**, orchestrating workflow execution,
 and dispatching jobs to worker nodes like AUREL while maintaining workflow scheduling and coordination.
 
 ### System Information
@@ -38,7 +38,7 @@ and dispatching jobs to worker nodes like AUREL while maintaining workflow sched
 auzlex@LORIC:~ $ sudo apt update && sudo apt install -y docker.io docker-compose && sudo systemctl enable docker --now
 ```
 
-* Docker is used to run any containerized jobs dispatched from **AUREL** or directly from workflows.
+* Docker is used to run any containerized jobs dispatched from **CASPER** which is given via Gitea actions upon this runner node.
 
 ### 2. Create Runner Directory
 
@@ -65,7 +65,7 @@ auzlex@LORIC:~/gitea-runner $ chmod +x act_runner
 ### 5. Fix DNS Resolution for CASPER
 
 * Edit `/etc/hosts` to allow LORIC to resolve `casper.local`:
-(This one is important because I have gitea working under reverse proxy via traefik so I need `http://casper.local:8083`)
+(This one is important because I have gitea working under reverse proxy via traefik so I need `http://casper.local:8083`).
 
 ```bash
 auzlex@LORIC:~ $ sudo nano /etc/hosts
@@ -79,14 +79,14 @@ auzlex@LORIC:~ $ sudo nano /etc/hosts
 
 ### 6. Register Runner with Gitea
 
-* Obtain the **registration token** from CASPER (Gitea UI: Settings → Actions → Runners → Add Runner)
+* Obtain the **registration token** from CASPER (Gitea UI: Settings → Actions → Runners → Add Runner).
 
 ```bash
 auzlex@LORIC:~/gitea-runner $ ./act_runner register --instance http://casper.local:8083 --token <TOKEN> --name loric-runner --labels pi3,armv7 --no-interactive
 ```
 
-* `<TOKEN>`: token obtained from CASPER
-* `--labels` can be customized for workflow targeting
+* `<TOKEN>`: token obtained from CASPER.
+* `--labels` can be customized for workflow targeting.
 
 ### 7. Start Runner (Manual)
 
@@ -94,7 +94,7 @@ auzlex@LORIC:~/gitea-runner $ ./act_runner register --instance http://casper.loc
 auzlex@LORIC:~/gitea-runner $ ./act_runner daemon
 ```
 
-* Runner will poll CASPER and appear online in Gitea
+* Runner will poll CASPER and appear online in Gitea.
 
 ### 8. Make Runner Persistent with systemd
 
@@ -136,9 +136,11 @@ auzlex@LORIC:~ $ sudo systemctl start gitea-runner
 auzlex@LORIC:~ $ sudo systemctl status gitea-runner
 ```
 
-## Testing The Runner
+## Testing Gitea Runner and worker simple via SSH
 
-We will test running a task on LORIC to `echo "Hello from AUREL!"`
+We will test running a task on **LORIC** to `echo "Hello from AUREL!"`
+
+An SSH has also been setup between **AUREL** and **LORIC** so that **LORIC** can issue commands to the isolated user account called **CI**, at the moment we can manually configure out Gitea workflow runner to issue commands carefully.
 
 ![alt text](resources/image.png)
 In the example image above, you can see the worker is successfully running my gitea workflow test.yml within my CICD-Test repo. The test.yml is to instruct commands under the ssh.
@@ -160,42 +162,64 @@ jobs:
 
 ```
 
-## Building on AUREL
+## Setting Up Docker Context
 
-```yml
-name: Docker Build on AUREL
+These commands will setup docker context for **LORIC**. **LORIC** also has docker installed and running which can perform builds and other tasks, however their role is to simply only handle requests from casper and tell other devices within my setup to do more of the heavy lifting.
 
-on:
-  push:
-    branches:
-      - main
+When a workflow runs:
 
-jobs:
-  docker-build:
-    runs-on: pi3
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+1. **CASPER** has a job that **LORIC** runs.
+2. **LORIC** prepares workflow.
+3. Docker commands execute using active context.
+4. Workloads run locally or remotely.
+5. Containers clean up normally after job.
 
-      - name: Build Docker Image Remotely
-        run: |
-          ssh ci@192.168.1.123 '
-            docker build -t ci-test-image .
-            docker run --rm ci-test-image
-          '
+If the runner is busy:
 
+* Jobs queue in Gitea upon **CASPER**
+
+We use this command below to ensure what types of context is available.
+```bash
+docker context ls
 ```
+
+```bash
+NAME      DESCRIPTION                               DOCKER ENDPOINT               ERROR
+aurel *                                             ssh://ci@192.168.1.123        
+default   Current DOCKER_HOST based configuration   unix:///var/run/docker.sock  
+```
+
+Docker contexts can be created with the following command:
+```bash
+docker context create aurel \
+  --docker "host=ssh://ci@192.168.1.123"
+```
+
+Next we tell **LORIC** to use aurel for docker usage.
+
+```bash
+docker context use aurel
+```
+
+After this:
+
+* `docker build` runs on **AUREL**.
+* `docker run` runs on **AUREL**.
+* Images and containers live on **AUREL**.
 
 ## Summary of LORIC Role
 
-* **Gitea Actions Runner:** Polls CASPER for workflows
-* **Dispatches jobs:** Can run Docker jobs locally or target AUREL worker node
-* **Persistent Service:** Runs as systemd service, auto-starts on boot
-* **Labels:** `pi3`, `armv7` (used for targeting specific workflows)
+* **Gitea Actions Runner:** Polls **CASPER** for workflows and receives jobs.
+* **Primary Execution Node:** Executes all workflow steps locally by default.
+* **Docker Orchestrator:** Runs Docker builds on **AUREL** or **LORIC** unless a remote context or SSH is explicitly used.
+* **Persistent Service:** Runs as a systemd service and auto-starts on boot.
+* **Job Scheduling:** Single-runner execution; jobs queue in Gitea on **CASPER** if **LORIC** is busy or offline.
+* **Labels:** `pi3`, `armv7` (used only to select which workflows this runner can accept).
+
 
 ### Notes
 
-* Ensure `/etc/hosts` entry for `casper.local` remains in place for DNS resolution
-* Runner binary located at: `~/gitea-runner/act_runner`
-* Docker must remain installed for workflows that use containerized jobs
-
+* **CASPER** never talks to workers directly; all execution flows through **LORIC**.
+* Ensure `/etc/hosts` entry for `casper.local` remains in place for DNS resolution.
+* Runner binary located at: `~/gitea-runner/act_runner`.
+* Docker must remain installed and updated for workflows that use containerized jobs.
