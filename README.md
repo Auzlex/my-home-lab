@@ -8,7 +8,7 @@ This is v1 a manual orchestration setup. to understand the fundamentals in what 
 
 I have a runner node with an optional worker node which can be sent tasks via shell in ssh. Currently all my processes and workers have to be carefully handled manually to ensure smooth operation which is not ideal.
 
-so my next goal is to move along to automatic scheduling and orchestration.
+so my next goal is to move along to automatic scheduling and orchestration, and look into use of kubernetes with more powerful computer setups in the future.
 
 ### Documentation
 
