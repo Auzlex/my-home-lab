@@ -1,8 +1,14 @@
 ## My Home Lab
 
-Welcome to the My Home Lab repository. This repo contains configurations and infrastructure documentation for my home lab, including my CI/CD setup. Just in case I forget anything or need to change anything with this current setup.
+Welcome to the My Home Lab repository. This repo contains configurations and infrastructure documentation for my home lab, as a DevOps CI/CD exercise. Just in case I forget anything or need to change anything with this current setup.
 
 ![alt text](docs/resources/myhomelab.png)
+
+This is v1 a manual orchestration setup. to understand the fundamentals in what goes into these automated systems.
+
+I have a runner node with an optional worker node which can be sent tasks via shell in ssh. Currently all my processes and workers have to be carefully handled manually to ensure smooth operation which is not ideal.
+
+so my next goal is to move along to automatic scheduling and orchestration.
 
 ### Documentation
 
