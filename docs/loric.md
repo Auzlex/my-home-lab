@@ -164,7 +164,7 @@ jobs:
 
 ## Setting Up Docker Context
 
-These commands will setup docker context for **LORIC**. **LORIC** also has docker installed and running which can perform builds and other tasks, however their role is to simply only handle requests from casper and tell other devices within my setup to do more of the heavy lifting.
+These commands will setup docker context for **LORIC**. **LORIC** also has docker installed and running which can perform builds and other tasks, however their role is to simply only handle requests from **CASPER** and tell other devices within my setup to do more of the heavy lifting.
 
 When a workflow runs:
 
@@ -195,7 +195,7 @@ docker context create aurel \
   --docker "host=ssh://ci@192.168.1.123"
 ```
 
-Next we tell **LORIC** to use aurel for docker usage.
+Next we tell **LORIC** to use **AUREL** for docker usage.
 
 ```bash
 docker context use aurel
