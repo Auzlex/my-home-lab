@@ -141,6 +141,12 @@ modalImg.onmousemove = function(event) {
 
 In the image above you can see a diagram or layout of the software and systems I have mapped out to the best of my ability to show how each device and service is communicating with each other.
 
+This is v1 a manual orchestration setup. to understand the fundamentals in what goes into these automated systems.
+
+I have a runner node with an optional worker node which can be sent tasks via shell in ssh. Currently all my processes and workers have to be carefully handled manually to ensure smooth operation which is not ideal.
+
+so my next goal is to move along to automatic scheduling and orchestration.
+
 ## Documentation Pages
 
 - [CASPER - Central Gitea Server](casper.md)
