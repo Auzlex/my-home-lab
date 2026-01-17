@@ -20,89 +20,63 @@ This page documents issues, problems, and maintenance activities that occur duri
 
 ---
 
-<div class="log-entry" data-date="2026-01-17" data-status="resolved">
-## January 17, 2026 - LORIC WiFi Connection Issue
+{% assign active_logs = site.data.maintenance-logs | where: "category", "active" %}
+{% for log in active_logs %}
+<div class="log-entry" data-date="{{ log.date }}" data-status="{{ log.status }}">
+## {{ log.date | date: "%B %d, %Y" }} - {{ log.title }}
 
+{% if log.problem_description %}
 ### Problem Description
-LORIC (Raspberry Pi 3 B+ orchestration node) did not respond after a reboot this morning. The device was unreachable over the network.
+{{ log.problem_description }}
+{% endif %}
 
+{% if log.diagnosis_steps %}
 ### Diagnosis Steps
-Connected Ethernet cable directly to LORIC to establish connectivity and investigate:
+{{ log.diagnosis_steps | markdownify }}
+{% endif %}
 
-1. Checked network interfaces:
-   ```bash
-   ip a
-   ```
-
-2. Examined wireless interface status:
-   ```bash
-   ifconfig wlan0
-   ```
-
-**Findings:** The Raspberry Pi configuration had forgotten the WiFi network SSID and had no active wireless connection.
-
+{% if log.resolution %}
 ### Resolution
-Reconfigured WiFi settings using the Raspberry Pi configuration tool:
-```bash
-sudo raspi-config
-```
+{{ log.resolution | markdownify }}
+{% endif %}
 
-Navigation steps:
-- Select **System Options** > **Wireless LAN**
-- Enter the correct SSID and passphrase
-- Save and exit raspi-config
-- Reboot the device
-
-LORIC successfully reconnected to the network and resumed normal operation.
-
+{% if log.follow_up_notes %}
 ### Follow-up Notes
-- Monitor LORIC's WiFi stability in the coming weeks
-- Check if this issue affects other Raspberry Pi devices (CASPER, AUREL)
-- Consider implementing more robust WiFi configuration or fallback to Ethernet for critical nodes
-- Investigate potential causes: power fluctuations, configuration corruption, or hardware issues
+{{ log.follow_up_notes | markdownify }}
+{% endif %}
 </div>
+{% endfor %}
 
 ## Planned Maintenance & Setups
 
 ---
 
-<div class="log-entry" data-date="2026-01-17" data-status="planned">
-## January 17, 2026 - ENLIL Pi-hole Setup (Planned)
+{% assign planned_logs = site.data.maintenance-logs | where: "category", "planned" %}
+{% for log in planned_logs %}
+<div class="log-entry" data-date="{{ log.date }}" data-status="{{ log.status }}">
+## {{ log.date | date: "%B %d, %Y" }} - {{ log.title }}
 
+{% if log.description %}
 ### Description
-ENLIL is a dedicated Raspberry Pi device intended to run Pi-hole, a network-wide ad blocker and DNS sinkhole. This will provide network-level ad blocking and improve privacy across all devices in the home lab network.
+{{ log.description }}
+{% endif %}
 
+{% if log.planned_setup_steps %}
 ### Planned Setup Steps
-1. **Initial Setup**
-   - Flash Raspberry Pi OS Lite to SD card
-   - Configure hostname as "ENLIL"
-   - Set static IP address in home network range
-   - Enable SSH and update system
+{{ log.planned_setup_steps | markdownify }}
+{% endif %}
 
-2. **Pi-hole Installation**
-   ```bash
-   curl -sSL https://install.pi-hole.net | bash
-   ```
-
-3. **Configuration**
-   - Set upstream DNS servers (Cloudflare, Google, or local)
-   - Configure DHCP settings if needed
-   - Set up admin interface password
-   - Enable web interface
-
-4. **Network Integration**
-   - Update router DNS settings to point to ENLIL's IP
-   - Test ad blocking functionality
-   - Configure device whitelisting if needed
-
+{% if log.status_detail %}
 ### Status
-**TODO** - Setup not yet completed. Hardware prepared but software installation pending.
+{{ log.status_detail }}
+{% endif %}
 
+{% if log.notes %}
 ### Notes
-- ENLIL will serve as the primary DNS server for the home lab
-- Consider backup DNS configuration for redundancy
-- Monitor network performance impact after deployment
+{{ log.notes | markdownify }}
+{% endif %}
 </div>
+{% endfor %}
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

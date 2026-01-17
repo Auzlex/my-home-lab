@@ -1,0 +1,22 @@
+[
+  {
+    "date": "2026-01-17",
+    "title": "LORIC WiFi Connection Issue",
+    "status": "resolved",
+    "category": "active",
+    "problem_description": "LORIC (Raspberry Pi 3 B+ orchestration node) did not respond after a reboot this morning. The device was unreachable over the network.",
+    "diagnosis_steps": "Connected Ethernet cable directly to LORIC to establish connectivity and investigate:\n\n1. Checked network interfaces:\n   ```bash\n   ip a\n   ```\n\n2. Examined wireless interface status:\n   ```bash\n   ifconfig wlan0\n   ```\n\n**Findings:** The Raspberry Pi configuration had forgotten the WiFi network SSID and had no active wireless connection.",
+    "resolution": "Reconfigured WiFi settings using the Raspberry Pi configuration tool:\n```bash\nsudo raspi-config\n```\n\nNavigation steps:\n- Select **System Options** > **Wireless LAN**\n- Enter the correct SSID and passphrase\n- Save and exit raspi-config\n- Reboot the device\n\nLORIC successfully reconnected to the network and resumed normal operation.",
+    "follow_up_notes": "- Monitor LORIC's WiFi stability in the coming weeks\n- Check if this issue affects other Raspberry Pi devices (CASPER, AUREL)\n- Consider implementing more robust WiFi configuration or fallback to Ethernet for critical nodes\n- Investigate potential causes: power fluctuations, configuration corruption, or hardware issues"
+  },
+  {
+    "date": "2026-01-17",
+    "title": "ENLIL Pi-hole Setup (Planned)",
+    "status": "planned",
+    "category": "planned",
+    "description": "ENLIL is a dedicated Raspberry Pi device intended to run Pi-hole, a network-wide ad blocker and DNS sinkhole. This will provide network-level ad blocking and improve privacy across all devices in the home lab network.",
+    "planned_setup_steps": "1. **Initial Setup**\n   - Flash Raspberry Pi OS Lite to SD card\n   - Configure hostname as \"ENLIL\"\n   - Set static IP address in home network range\n   - Enable SSH and update system\n\n2. **Pi-hole Installation**\n   ```bash\n   curl -sSL https://install.pi-hole.net | bash\n   ```\n\n3. **Configuration**\n   - Set upstream DNS servers (Cloudflare, Google, or local)\n   - Configure DHCP settings if needed\n   - Set up admin interface password\n   - Enable web interface\n\n4. **Network Integration**\n   - Update router DNS settings to point to ENLIL's IP\n   - Test ad blocking functionality\n   - Configure device whitelisting if needed",
+    "status_detail": "**TODO** - Setup not yet completed. Hardware prepared but software installation pending.",
+    "notes": "- ENLIL will serve as the primary DNS server for the home lab\n- Consider backup DNS configuration for redundancy\n- Monitor network performance impact after deployment"
+  }
+]
