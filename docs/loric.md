@@ -64,11 +64,20 @@ auzlex@LORIC:~/gitea-runner $ chmod +x act_runner
 
 ### 5. Fix DNS Resolution for CASPER
 
-* Edit `/etc/hosts` to allow LORIC to resolve `casper.local`:
+* Since `/etc/hosts` is managed by cloud-init and changes won't persist on reboot, we need to modify the cloud-init configuration and template instead.
+* First, disable cloud-init management of `/etc/hosts` by editing `/etc/cloud/cloud.cfg`:
+
+```bash
+auzlex@LORIC:~ $ sudo nano /etc/cloud/cloud.cfg
+```
+
+* Set `manage_etc_hosts: false` in the configuration.
+
+* Then, edit `/etc/cloud/templates/hosts.debian.tmpl` to allow LORIC to resolve `casper.local`:
 (This one is important because I have gitea working under reverse proxy via traefik so I need `http://casper.local:8083`).
 
 ```bash
-auzlex@LORIC:~ $ sudo nano /etc/hosts
+auzlex@LORIC:~ $ sudo nano /etc/cloud/templates/hosts.debian.tmpl
 ```
 
 * Add:
