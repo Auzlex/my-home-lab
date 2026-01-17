@@ -7,6 +7,7 @@ This page documents issues, problems, and maintenance activities that occur duri
 **Sorting:** Entries are maintained in reverse chronological order (newest first) to keep recent issues and activities at the top for quick reference.
 
 {% include log-controls.html %}
+{% include log-controls.js %}
 
 <style>
 .log-entry div {
