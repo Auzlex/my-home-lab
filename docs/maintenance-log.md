@@ -1,13 +1,3 @@
-[← Back to Home](index.md)
-
-# Maintenance Log
-
-This page documents issues, problems, and maintenance activities that occur during the operation of the home lab. Each entry includes the date, problem description, diagnosis steps, resolution, and any follow-up notes.
-
-**Sorting:** Entries are maintained in reverse chronological order (newest first) to keep recent issues and activities at the top for quick reference.
-
-{% include log-controls.html %}
-{% include log-controls.js %}
 
 <style>
 .log-entry div {
@@ -40,6 +30,17 @@ This page documents issues, problems, and maintenance activities that occur duri
   font-weight: bold;
 }
 </style>
+
+[← Back to Home](index.md)
+
+# Maintenance Log
+
+This page documents issues, problems, and maintenance activities that occur during the operation of the home lab. Each entry includes the date, problem description, diagnosis steps, resolution, and any follow-up notes.
+
+**Sorting:** Entries are maintained in reverse chronological order (newest first) to keep recent issues and activities at the top for quick reference.
+
+{% include log-controls.html %}
+{% include log-controls.js %}
 
 ## Active Issues & Recent Resolutions
 
