@@ -24,7 +24,6 @@ across all devices in the home lab network.
 
 ## To Be Done
 
-- System setup and OS installation
 - Pi-hole installation and configuration
 - Network integration and testing
 - Security hardening and monitoring setup
