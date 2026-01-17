@@ -152,3 +152,5 @@ so my next goal is to move along to automatic scheduling and orchestration, and 
 - [CASPER - Central Gitea Server](casper.md)
 - [LORIC - Orchestration Node](loric.md)
 - [AUREL - Execution Node](aurel.md)
+- [ENLIL - Network Services Node (Pi-hole)](enlil.md)
+- [Maintenance Log](maintenance-log.md)
