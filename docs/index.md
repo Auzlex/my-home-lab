@@ -1,4 +1,3 @@
-
 # Home Lab CI/CD
 
 This project documents a multi-node CI/CD lab using:
@@ -22,21 +21,16 @@ The goal is to mirror real-world CI infrastructure on low-cost hardware.
 </div>
 
 <style>
-.image-container {
-  text-align: center;
-}
+.image-container { text-align: center; }
 
 .modal {
   display: none;
   position: fixed;
   z-index: 1;
   padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.9);
 }
 
@@ -46,97 +40,149 @@ The goal is to mirror real-world CI infrastructure on low-cost hardware.
   width: 80%;
   max-width: 700px;
   cursor: grab;
-  transform-origin: 0 0;
+  transform-origin: center center; /* <-- zoom around image center */
+  transition: transform 0.02s linear; /* smooth-ish during scale updates */
 }
 
-.modal-content:active {
-  cursor: grabbing;
-}
+.modal-content:active { cursor: grabbing; }
 
 .close {
   position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-  cursor: pointer;
+  top: 15px; right: 35px;
+  color: #f1f1f1; font-size: 40px; font-weight: bold;
+  transition: 0.3s; cursor: pointer;
 }
-
-.close:hover,
-.close:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
+.close:hover, .close:focus { color: #bbb; }
 </style>
 
 <script>
-var modal = document.getElementById('image-modal');
-var img = document.getElementById('architecture-image');
-var modalImg = document.getElementById('modal-image');
-var span = document.getElementsByClassName('close')[0];
+(function() {
+  var modal = document.getElementById('image-modal');
+  var img = document.getElementById('architecture-image');
+  var modalImg = document.getElementById('modal-image');
+  var span = document.getElementsByClassName('close')[0];
 
-var scale = 1;
-var panning = false;
-var pointX = 0;
-var pointY = 0;
-var start = { x: 0, y: 0 };
+  var scale = 1;
+  var panning = false;
+  var pointX = 0;
+  var pointY = 0;
+  var start = { x: 0, y: 0 };
 
-img.onclick = function(){
-  modal.style.display = 'block';
-  modalImg.src = this.src;
-  resetZoom();
-}
+  function setTransform() {
+    modalImg.style.transform = 'translate(' + pointX + 'px, ' + pointY + 'px) scale(' + scale + ')';
+  }
 
-span.onclick = function() {
-  modal.style.display = 'none';
-  resetZoom();
-}
+  function resetZoom() {
+    scale = 1;
+    pointX = 0;
+    pointY = 0;
+    setTransform();
+  }
 
-modal.onclick = function(event) {
-  if (event.target == modal) {
+  img.onclick = function(){
+    modal.style.display = 'block';
+    modalImg.src = this.src;
+    resetZoom();
+  };
+
+  span.onclick = function() {
     modal.style.display = 'none';
     resetZoom();
+  };
+
+  modal.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+      resetZoom();
+    }
+  };
+
+  // Wheel: zoom relative to image center (no pointer-based offset)
+  modalImg.onwheel = function(event) {
+    event.preventDefault();
+    var delta = -event.deltaY; // positive when scrolling up
+    var factor = delta > 0 ? 1.2 : 1 / 1.2;
+    var newScale = Math.max(0.5, Math.min(5, scale * factor));
+    scale = newScale;
+    // transform-origin is center, so no need to compute complex offsets
+    setTransform();
+  };
+
+  // Panning (drag)
+  modalImg.onmousedown = function(event) {
+    event.preventDefault();
+    panning = true;
+    start = { x: event.clientX - pointX, y: event.clientY - pointY };
+  };
+
+  window.addEventListener('mouseup', function() {
+    panning = false;
+  });
+
+  modalImg.onmousemove = function(event) {
+    if (!panning) return;
+    event.preventDefault();
+    pointX = (event.clientX - start.x);
+    pointY = (event.clientY - start.y);
+    setTransform();
+  };
+
+  // Touch support: single-finger pan, two-finger pinch (basic)
+  var touchState = { lastDist: null, lastCenter: null };
+
+  function distance(a, b) {
+    var dx = a.clientX - b.clientX;
+    var dy = a.clientY - b.clientY;
+    return Math.sqrt(dx*dx + dy*dy);
   }
-}
 
-function resetZoom() {
-  scale = 1;
-  pointX = 0;
-  pointY = 0;
-  modalImg.style.transform = 'translate(0px, 0px) scale(1)';
-}
+  function centerPoint(a, b) {
+    return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
+  }
 
-modalImg.onwheel = function(event) {
-  event.preventDefault();
-  var xs = (event.clientX - pointX) / scale;
-  var ys = (event.clientY - pointY) / scale;
-  var delta = (event.wheelDelta ? event.wheelDelta : -event.deltaY);
-  (delta > 0) ? (scale *= 1.2) : (scale /= 1.2);
-  pointX = event.clientX - xs * scale;
-  pointY = event.clientY - ys * scale;
-  modalImg.style.transform = 'translate(' + pointX + 'px, ' + pointY + 'px) scale(' + scale + ')';
-}
+  modalImg.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1) {
+      // pan start
+      var t = e.touches[0];
+      panning = true;
+      start = { x: t.clientX - pointX, y: t.clientY - pointY };
+    } else if (e.touches.length === 2) {
+      // pinch start
+      touchState.lastDist = distance(e.touches[0], e.touches[1]);
+      touchState.lastCenter = centerPoint(e.touches[0], e.touches[1]);
+    }
+  }, { passive: false });
 
-modalImg.onmousedown = function(event) {
-  event.preventDefault();
-  panning = true;
-  start = { x: event.clientX - pointX, y: event.clientY - pointY };
-}
+  modalImg.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (e.touches.length === 1 && panning) {
+      var t = e.touches[0];
+      pointX = (t.clientX - start.x);
+      pointY = (t.clientY - start.y);
+      setTransform();
+    } else if (e.touches.length === 2) {
+      var dist = distance(e.touches[0], e.touches[1]);
+      var center = centerPoint(e.touches[0], e.touches[1]);
+      if (touchState.lastDist) {
+        var factor = dist / touchState.lastDist;
+        var newScale = Math.max(0.5, Math.min(5, scale * factor));
+        scale = newScale;
+        // keep current translation; transform-origin center will handle the rest
+        setTransform();
+      }
+      touchState.lastDist = dist;
+      touchState.lastCenter = center;
+    }
+  }, { passive: false });
 
-modalImg.onmouseup = function() {
-  panning = false;
-}
+  modalImg.addEventListener('touchend', function(e) {
+    if (e.touches.length === 0) {
+      panning = false;
+      touchState.lastDist = null;
+    }
+  });
 
-modalImg.onmousemove = function(event) {
-  event.preventDefault();
-  if (!panning) return;
-  pointX = (event.clientX - start.x);
-  pointY = (event.clientY - start.y);
-  modalImg.style.transform = 'translate(' + pointX + 'px, ' + pointY + 'px) scale(' + scale + ')';
-}
+})();
 </script>
 
 In the image above you can see a diagram or layout of the software and systems I have mapped out to the best of my ability to show how each device and service is communicating with each other.
