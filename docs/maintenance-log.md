@@ -73,21 +73,14 @@ This page documents issues, problems, and maintenance activities that occur duri
   {% endif %}
 
   {% if log.follow_up_notes %}
-  <h3>Follow-up Notes</h3>
-  <ul>
-    {% for note in log.follow_up_notes | split: "\n" %}
+<h3>Follow-up Notes</h3>
+<ul>
+  {% for note in log.follow_up_notes %}
     <li>{{ note }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
+  {% endfor %}
+</ul>
+{% endif %}
 
-  {% if log.notes %}
-  <h3>Notes</h3>
-  <ul>
-    {% for note in log.notes | split: "\n" %}
-    <li>{{ note }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
+  
 </div>
 {% endfor %}

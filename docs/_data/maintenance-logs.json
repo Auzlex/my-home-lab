@@ -7,7 +7,12 @@
     "problem_description": "LORIC (Raspberry Pi 3 B+ orchestration node) did not respond after a reboot. The device was unreachable over the network, and the Gitea runner service on it was offline.",
     "diagnosis_steps": "1. Connected Ethernet cable directly to LORIC to establish connectivity and investigate:\n   <pre><code>ip a</code></pre>\n\n2. Examined wireless interface status:\n   <pre><code>ifconfig wlan0</code></pre>\n\n<strong>Findings:</strong>\n- The Raspberry Pi had forgotten the WiFi SSID and had no active wireless connection.\n- Even after Ethernet connectivity was restored, the Gitea runner service failed to start due to DNS resolution issues.",
     "resolution": "1. Reconfigured WiFi settings using Raspberry Pi configuration tool:\n   <pre><code>sudo raspi-config</code></pre>\n   - Select <strong>System Options</strong> > <strong>Wireless LAN</strong>\n   - Enter correct SSID and passphrase\n   - Save and reboot\n\n2. Fixed local DNS resolution to allow the runner service to start:\n   <pre><code>sudo nano /etc/hosts</code></pre>\n   Added entries for all relevant nodes.\n\n3. Restarted Gitea runner:\n   <pre><code>sudo systemctl restart gitea-runner\nsudo systemctl status gitea-runner</code></pre>\n\nLORIC reconnected to the network and the runner service resumed normal operation.",
-    "follow_up_notes": "- Keep an eye on LORIC’s WiFi over the next few days to make sure it stays stable.\n- Make sure all Pi nodes have persistent DNS entries so the runner can always find what it needs.\n- For critical services, consider keeping a backup Ethernet connection ready.\n- Watch the runner logs for any future failures that might be network-related."
+    "follow_up_notes": [
+      "Keep an eye on LORIC’s WiFi over the next few days to make sure it stays stable.",
+      "Make sure all Pi nodes have persistent DNS entries so the runner can always find what it needs.",
+      "For critical services, consider keeping a backup Ethernet connection ready.",
+      "Watch the runner logs for any future failures that might be network-related."
+    ]
   },
   {
     "date": "2026-01-17",
@@ -17,16 +22,11 @@
     "problem_description": "The /etc/hosts file was being reset after system reboots, losing custom DNS resolutions including casper.local entries.",
     "diagnosis_steps": "Investigated the cause of hosts file resetting:\n\n1. Checked cloud-init configuration:\n   <pre><code>cat /etc/cloud/cloud.cfg</code></pre>\n\n2. Examined hosts template file:\n   <pre><code>cat /etc/cloud/templates/hosts.debian.tmpl</code></pre>\n\n<strong>Findings:</strong> Cloud-init was managing /etc/hosts and overwriting custom entries on each boot.",
     "resolution": "Disabled cloud-init management of /etc/hosts and updated the template:\n\n1. Edited cloud-init configuration:\n   <pre><code>sudo nano /etc/cloud/cloud.cfg</code></pre>\n   Set: <code>manage_etc_hosts: false</code>\n\n2. Updated hosts template to include DNS resolution:\n   <pre><code>sudo nano /etc/cloud/templates/hosts.debian.tmpl</code></pre>\n   Added: <code>192.168.1.120 casper.local casper</code>\n\n3. Rebooted system to verify changes persist:\n   <pre><code>sudo reboot</code></pre>\n\nThe /etc/hosts file now retains custom entries across reboots.",
-    "follow_up_notes": "- Double-check that casper.local actually resolves after a reboot.\n- Look at the other Pis to make sure they don’t have the same cloud-init issue.\n- Keep a note of this fix for future setups so it doesn’t catch you off guard.\n- Watch for any weird behavior from cloud-init in the coming weeks."
-  },
-  {
-    "date": "2026-01-17",
-    "title": "ENLIL Pi-hole Setup (Planned)",
-    "status": "planned",
-    "category": "planned",
-    "description": "ENLIL is a dedicated Raspberry Pi device intended to run Pi-hole, a network-wide ad blocker and DNS sinkhole. This will provide network-level ad blocking and improve privacy across all devices in the home lab network.",
-    "planned_setup_steps": "1. <strong>Initial Setup</strong>\n   - Flash Raspberry Pi OS Lite to SD card\n   - Configure hostname as \"ENLIL\"\n   - Set static IP address in home network range\n   - Enable SSH and update system\n\n2. <strong>Pi-hole Installation</strong>\n   <pre><code>curl -sSL https://install.pi-hole.net | bash</code></pre>\n\n3. <strong>Configuration</strong>\n   - Set upstream DNS servers (Cloudflare, Google, or local)\n   - Configure DHCP settings if needed\n   - Set up admin interface password\n   - Enable web interface\n\n4. <strong>Network Integration</strong>\n   - Update router DNS settings to point to ENLIL's IP\n   - Test ad blocking functionality\n   - Configure device whitelisting if needed",
-    "status_detail": "**TODO** - Setup not yet completed. Hardware prepared but software installation pending.",
-    "notes": "- ENLIL will be the main DNS server for the lab network.\n- Keep a backup DNS option just in case ENLIL goes down.\n- After setting it up, check that network devices actually see fewer ads and that everything still resolves properly.\n- Watch for any performance hiccups once Pi-hole is running."
+    "follow_up_notes": [
+      "Double-check that casper.local actually resolves after a reboot.",
+      "Look at the other Pis to make sure they don’t have the same cloud-init issue.",
+      "Keep a note of this fix for future setups so it doesn’t catch you off guard.",
+      "Watch for any weird behavior from cloud-init in the coming weeks."
+    ]
   }
 ]
