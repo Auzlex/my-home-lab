@@ -1,8 +1,3 @@
----
-layout: default
-title: Maintenance Log
----
-
 <style>
 .log-entry {
   margin-bottom: 2rem;
@@ -40,18 +35,11 @@ title: Maintenance Log
 
 This page documents issues, problems, and maintenance activities that occur during the operation of the home lab. Each entry includes the date, problem description, diagnosis steps, resolution, and follow-up notes.
 
-**Sorting:** Entries are maintained in reverse chronological order (newest first).
-
-{% include log-controls.html %}
-{% include log-controls.js %}
-
-## Active Issues & Recent Resolutions
-
 ---
 
-{% assign active_logs = site.data.maintenance-logs | where: "category", "active" %}
-{% for log in active_logs %}
-<div class="log-entry" data-date="{{ log.date }}" data-status="{{ log.status }}">
+{% assign all_logs = site.data.maintenance-logs | sort: "date" | reverse %}
+{% for log in all_logs %}
+<div class="log-entry">
   <h2>{{ log.date | date: "%B %d, %Y" }} - {{ log.title }}</h2>
 
   {% if log.problem_description %}
@@ -69,26 +57,6 @@ This page documents issues, problems, and maintenance activities that occur duri
   <div>{{ log.resolution | markdownify }}</div>
   {% endif %}
 
-  {% if log.follow_up_notes %}
-  <h3>Follow-up Notes</h3>
-  <ul>
-    {% for note in log.follow_up_notes | split: "\n" %}
-    <li>{{ note }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-</div>
-{% endfor %}
-
-## Planned Maintenance & Setups
-
----
-
-{% assign planned_logs = site.data.maintenance-logs | where: "category", "planned" %}
-{% for log in planned_logs %}
-<div class="log-entry" data-date="{{ log.date }}" data-status="{{ log.status }}">
-  <h2>{{ log.date | date: "%B %d, %Y" }} - {{ log.title }}</h2>
-
   {% if log.description %}
   <h3>Description</h3>
   <div>{{ log.description | markdownify }}</div>
@@ -102,6 +70,15 @@ This page documents issues, problems, and maintenance activities that occur duri
   {% if log.status_detail %}
   <h3>Status</h3>
   <div>{{ log.status_detail | markdownify }}</div>
+  {% endif %}
+
+  {% if log.follow_up_notes %}
+  <h3>Follow-up Notes</h3>
+  <ul>
+    {% for note in log.follow_up_notes | split: "\n" %}
+    <li>{{ note }}</li>
+    {% endfor %}
+  </ul>
   {% endif %}
 
   {% if log.notes %}
