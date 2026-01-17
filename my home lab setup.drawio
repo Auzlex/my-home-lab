@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.0 Chrome/140.0.7339.249 Electron/38.7.2 Safari/537.36" version="29.3.0">
   <diagram name="Page-1" id="KQaZ9sGM0VNIyPZshfia">
-    <mxGraphModel dx="3281" dy="1422" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2916" dy="1209" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -208,7 +208,7 @@
         <mxCell id="fbhYTWKZqsOjxwU_Kk2A-18" parent="fbhYTWKZqsOjxwU_Kk2A-17" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="STORAGE" vertex="1">
           <mxGeometry height="160" width="520" x="40" y="80" as="geometry" />
         </mxCell>
-        <mxCell id="fbhYTWKZqsOjxwU_Kk2A-19" parent="fbhYTWKZqsOjxwU_Kk2A-18" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;C Drive&lt;div&gt;256 M.2 NVME SSD&lt;/div&gt;" vertex="1">
+        <mxCell id="fbhYTWKZqsOjxwU_Kk2A-19" parent="fbhYTWKZqsOjxwU_Kk2A-18" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;C Drive&lt;div&gt;500GB M.2 NVME SSD&lt;/div&gt;" vertex="1">
           <mxGeometry height="90" width="100" x="20" y="40" as="geometry" />
         </mxCell>
         <mxCell id="fbhYTWKZqsOjxwU_Kk2A-23" parent="fbhYTWKZqsOjxwU_Kk2A-18" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;D Drive&lt;div&gt;1TB SSD&lt;/div&gt;" vertex="1">
