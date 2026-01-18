@@ -7,7 +7,7 @@ This project documents a multi-node CI/CD lab using:
 - Raspberry Pi
 - ARM + x86 separation
 
-The goal is to mirror real-world CI infrastructure on low-cost hardware.
+The goal is to understand and develop skills for real-world CI/CD infrastructure upon re-used electronic waste or old hardware around me.
 
 ## Architecture Diagram
 
