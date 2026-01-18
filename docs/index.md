@@ -200,8 +200,8 @@ My next goals is to expand the workers and determine where certain offloaded tas
 
 ## Documentation Pages
 
-- [CASPER - Central Gitea Server](casper.md)
-- [LORIC - Orchestration Node](loric.md)
-- [AUREL - Execution Node](aurel.md)
-- [ENLIL - Network Services Node (Pi-hole)](enlil.md)
+- [CASPER - Gitea Server & Network Attached Storage](casper.md)
+- [LORIC - Orchestrator Node](loric.md)
+- [AUREL - Worker Node](aurel.md)
+- [ENLIL - Local DNS Resolver](enlil.md)
 - [Maintenance Log](maintenance-log.md)

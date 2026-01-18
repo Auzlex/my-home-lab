@@ -1,7 +1,7 @@
 
 [← Back to Home](index.md)
 
-# LORIC - Orchestration Node (Gitea Runner)
+# LORIC - Orchestrator Node (Gitea)
 
 * **Hostname:** LORIC  
 * **Type:** Raspberry Pi 3 B+
