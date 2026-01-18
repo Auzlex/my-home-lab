@@ -1,19 +1,21 @@
 
 [← Back to Home](index.md)
 
-## AUREL – Execution Node (Docker)
+# AUREL – Worker Node
 
 * **Hostname:** AUREL
 * **IP Address:** 192.168.1.123 **(STATIC)**
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)
 
-### Purpose
+## Purpose
 
 **AUREL** acts as a dedicated **build worker** within the home-lab CI/CD infrastructure.
 It is responsible for executing all heavy build and test workloads, keeping orchestration
 and scheduling separate from execution.
 
-### System Information
+---
+
+## System Information
 
 **Kernel / OS**
 - Kernel: 6.12.62+rpt-rpi-v8
@@ -31,47 +33,30 @@ and scheduling separate from execution.
 
 ---
 
-### Role in the CI/CD System
+## Role In The Lab
 
-* Executes Docker builds and test jobs
-* Runs ARM-native workloads
-* Acts as a remote Docker host
-* Receives jobs indirectly from the CI runner on LORIC via SSH or Docker context
-* Provides build isolation from the CI orchestrator
-
----
-
-### Services & Packages Running
-
-* **Docker Engine** – container builds and test execution
-* **OpenSSH Server** – secure remote job execution
-* **Git** – source code checkout
-* **Build tools** – `build-essential` for native compilation
-* **System utilities** – `curl`, `jq`, `ca-certificates`
+* Executes Docker builds and test jobs.
+* Runs ARM-native workloads.
+* Acts as a remote Docker host.
+* Receives jobs indirectly from LORIC via SSH or Docker context over SSH.
 
 ---
 
-### Network Role
+## Services & Packages Running
 
-* Accessible on the local network via SSH
-* Used as a remote Docker context by LORIC
-* Does not expose public services
-* Internal-only build execution node
+* **Docker Engine** – container builds and test execution.
+* **OpenSSH Server** – secure remote job execution.
+* **Git** – source code checkout.
+* **Build tools** – `build-essential` for native compilation.
+* **System utilities** – `curl`, `jq`, `ca-certificates`.
 
 ---
-
-## AUREL – CI User Setup Notes
-
-**User:** ci
-
-### Purpose
-
-* Dedicated CI user for build/workload isolation
-* Runs Docker commands
-* Receives remote jobs via SSH from LORIC
 
 ## Setup Steps
+We will create a user ci which will be used for build related workloads and for isolation. This user will recieve remote jobs or commands via SSH from LORIC.
+
 **AUREL** was setup using the following steps and instructions:
+
 
 ### 1. Install Docker
 
@@ -116,7 +101,7 @@ sudo systemctl enable ssh && sudo systemctl start ssh
 sudo -u ci ssh-keygen -t ed25519 -C "ci@AUREL" -f /home/ci/.ssh/id_ed25519
 ```
 
-* Copy the public key to LORIC runner or other orchestrator nodes for secure job execution
+* Copy the public key to LORIC runner or other orchestrator nodes for secure job execution.
 
 6. Test SSH login (password initially, then test key-based auth):
 
@@ -130,27 +115,13 @@ ssh ci@192.168.1.123
 ls -ld /home/ci
 ```
 
-### Notes
-
-* Ensure SSH key is generated for `ci` to allow LORIC to execute jobs without prompting for a password
-* Password must be set initially for key setup
-* No sudo access is required unless a workflow explicitly needs it
-
 ---
 
-### Summary
+## Notes
 
-AUREL is a locked-down, ARM-based Docker worker node designed for CI workloads.
-It performs all compute-heavy tasks while remaining fully controlled by the CI runner on LORIC,
-demonstrating clean separation of responsibilities in a distributed CI/CD architecture.
-Proper SSH key setup and password management ensure secure, passwordless job execution.
-
----
-
-## AUREL – Additional Setup Notes
-
+* Accessible on the local network via SSH.
+* Does not expose public services.
 * Docker is the main execution environment for all workloads, ensure it remains updated.
-* SSH access must be tested after every OS update.
 * All jobs are executed under `ci` to maintain isolation.
 * For troubleshooting, check logs in `/var/log/syslog` or use `journalctl -u ssh` for SSH issues.
 * Any workspace directories must remain owned by `ci` for correct job permissions.

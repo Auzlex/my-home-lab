@@ -8,26 +8,42 @@
 * **IP Address:** 192.168.1.122 **(STATIC)**
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)  
 
-### Purpose
+## Purpose
 **LORIC** acts as the dedicated **runner node** within the home-lab CI/CD infrastructure.
 It is responsible for polling the Gitea server on **CASPER**, orchestrating workflow execution,
 and dispatching jobs to worker nodes like AUREL while maintaining workflow scheduling and coordination.
 
-### System Information
+---
+
+## System Information
 
 **Kernel / OS**
-- Kernel: 6.12.62+rpt-rpi-v8
-- Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18)
-- Architecture: aarch64
-- Distro: Debian (Raspberry Pi variant)
+- Kernel: 6.12.62+rpt-rpi-v8.
+- Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18).
+- Architecture: aarch64.
+- Distro: Debian (Raspberry Pi variant).
 
 **SSH Stack**
-- OpenSSH: OpenSSH_10.0p2 Debian-7
-- OpenSSL: 3.5.4 (30 Sep 2025)
+- OpenSSH: OpenSSH_10.0p2 Debian-7.
+- OpenSSL: 3.5.4 (30 Sep 2025).
 
 **Docker**
-- Docker Engine: 26.1.5+dfsg1
-- Build: a72d7cd
+- Docker Engine: 26.1.5+dfsg1.
+- Build: a72d7cd.
+
+
+---
+
+### Role In The Lab
+
+* **Gitea Actions Runner:** Polls **CASPER** for workflows and receives jobs.
+* **Primary Execution Node:** Executes all workflow steps locally by default.
+* **Docker Orchestrator:** Runs Docker builds on **AUREL** or **LORIC** unless a remote context or SSH is explicitly used.
+* **Persistent Service:** Runs as a systemd service and auto-starts on boot.
+* **Job Scheduling:** Single-runner execution; jobs queue in Gitea on **CASPER** if **LORIC** is busy or offline.
+* **Labels:** `pi3`, `armv7` (used only to select which workflows this runner can accept).
+
+---
 
 ## Setup Steps
 **LORIC** was setup using the following steps and instructions:
@@ -145,7 +161,7 @@ auzlex@LORIC:~ $ sudo systemctl start gitea-runner
 auzlex@LORIC:~ $ sudo systemctl status gitea-runner
 ```
 
-## Testing Gitea Runner and worker simple via SSH
+### 9. Testing Gitea Runner and worker simple via SSH
 
 We will test running a task on **LORIC** to `echo "Hello from AUREL!"`
 
@@ -171,7 +187,7 @@ jobs:
 
 ```
 
-## Setting Up Docker Context
+### 10. Setting Up Docker Context
 
 These commands will setup docker context for **LORIC**. **LORIC** also has docker installed and running which can perform builds and other tasks, however their role is to simply only handle requests from **CASPER** and tell other devices within my setup to do more of the heavy lifting.
 
@@ -216,17 +232,10 @@ After this:
 * `docker run` runs on **AUREL**.
 * Images and containers live on **AUREL**.
 
-## Summary of LORIC Role
 
-* **Gitea Actions Runner:** Polls **CASPER** for workflows and receives jobs.
-* **Primary Execution Node:** Executes all workflow steps locally by default.
-* **Docker Orchestrator:** Runs Docker builds on **AUREL** or **LORIC** unless a remote context or SSH is explicitly used.
-* **Persistent Service:** Runs as a systemd service and auto-starts on boot.
-* **Job Scheduling:** Single-runner execution; jobs queue in Gitea on **CASPER** if **LORIC** is busy or offline.
-* **Labels:** `pi3`, `armv7` (used only to select which workflows this runner can accept).
+---
 
-
-### Notes
+## Notes
 
 * **CASPER** never talks to workers directly; all execution flows through **LORIC**.
 <!-- * Ensure `/etc/hosts` entry for `192.168.1.124` remains in place for DNS resolution. -->
