@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.0 Chrome/140.0.7339.249 Electron/38.7.2 Safari/537.36" version="29.3.0">
   <diagram name="Page-1" id="KQaZ9sGM0VNIyPZshfia">
-    <mxGraphModel dx="2916" dy="1209" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3433" dy="1511" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -197,10 +197,7 @@
           <mxGeometry height="40" width="320" x="40" y="40" as="geometry" />
         </mxCell>
         <mxCell id="fbhYTWKZqsOjxwU_Kk2A-30" parent="fbhYTWKZqsOjxwU_Kk2A-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#be3956, #954641);strokeColor=light-dark(#be3956, #b3746d);fontColor=light-dark(#FFFFFF,#DBABAB);" value="&lt;b&gt;PI HOLE&lt;/b&gt;" vertex="1">
-          <mxGeometry height="40" width="320" x="40" y="300" as="geometry" />
-        </mxCell>
-        <mxCell id="fbhYTWKZqsOjxwU_Kk2A-31" parent="fbhYTWKZqsOjxwU_Kk2A-1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO&lt;/h1&gt;&lt;p&gt;This is the next thing i am going to setup, reason why I am using a pi-hole is this is a raspberry pi model b first generation rev 1/2 so its not very powerful.&lt;/p&gt;" vertex="1">
-          <mxGeometry height="110" width="320" x="40" y="370" as="geometry" />
+          <mxGeometry height="230" width="320" x="40" y="300" as="geometry" />
         </mxCell>
         <mxCell id="fbhYTWKZqsOjxwU_Kk2A-17" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="LABRYS&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;&amp;nbsp;(MY WORKSTATION)&lt;/span&gt;" vertex="1">
           <mxGeometry height="560" width="600" x="40" y="720" as="geometry" />
