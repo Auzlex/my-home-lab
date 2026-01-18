@@ -62,7 +62,7 @@ auzlex@LORIC:~/gitea-runner $ mv act_runner-0.2.13-linux-arm-7 act_runner
 auzlex@LORIC:~/gitea-runner $ chmod +x act_runner
 ```
 
-### 5. Fix DNS Resolution for CASPER
+<!-- ### 5. Fix DNS Resolution for CASPER
 
 * Since `/etc/hosts` is managed by cloud-init and changes won't persist on reboot, we need to modify the cloud-init configuration and template instead.
 * First, disable cloud-init management of `/etc/hosts` by editing `/etc/cloud/cloud.cfg`:
@@ -73,8 +73,8 @@ auzlex@LORIC:~ $ sudo nano /etc/cloud/cloud.cfg
 
 * Set `manage_etc_hosts: false` in the configuration.
 
-* Then, edit `/etc/cloud/templates/hosts.debian.tmpl` to allow LORIC to resolve `casper.local`:
-(This one is important because I have gitea working under reverse proxy via traefik so I need `http://casper.local:8083`).
+* Then, edit `/etc/cloud/templates/hosts.debian.tmpl` to allow LORIC to resolve `192.168.1.124`:
+(This one is important because I have gitea working under reverse proxy via traefik so I need `http://192.168.1.124:8083`).
 
 ```bash
 auzlex@LORIC:~ $ sudo nano /etc/cloud/templates/hosts.debian.tmpl
@@ -83,15 +83,15 @@ auzlex@LORIC:~ $ sudo nano /etc/cloud/templates/hosts.debian.tmpl
 * Add:
 
 ```
-192.168.1.124 casper.local
-```
+192.168.1.124 192.168.1.124
+``` -->
 
 ### 6. Register Runner with Gitea
 
 * Obtain the **registration token** from CASPER (Gitea UI: Settings → Actions → Runners → Add Runner).
 
 ```bash
-auzlex@LORIC:~/gitea-runner $ ./act_runner register --instance http://casper.local:8083 --token <TOKEN> --name loric-runner --labels pi3,armv7 --no-interactive
+auzlex@LORIC:~/gitea-runner $ ./act_runner register --instance http://192.168.1.124:8083 --token <TOKEN> --name loric-runner --labels pi3,armv7 --no-interactive
 ```
 
 * `<TOKEN>`: token obtained from CASPER.
@@ -229,6 +229,6 @@ After this:
 ### Notes
 
 * **CASPER** never talks to workers directly; all execution flows through **LORIC**.
-* Ensure `/etc/hosts` entry for `casper.local` remains in place for DNS resolution.
+<!-- * Ensure `/etc/hosts` entry for `192.168.1.124` remains in place for DNS resolution. -->
 * Runner binary located at: `~/gitea-runner/act_runner`.
 * Docker must remain installed and updated for workflows that use containerized jobs.
