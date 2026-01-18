@@ -36,7 +36,7 @@
     "category": "active",
     "problem_description": "Deployment of Pi-hole on ENLIL (Raspberry Pi 1 Model B) as a dedicated network DNS and filtering node.",
     "diagnosis_steps": "Verified Pi-hole operation via web interface and query logs.\n\n<strong>Findings:</strong>\n- Pi-hole was successfully serving DNS requests.\n- Traffic was being filtered as expected with no immediate false positives observed.",
-    "resolution": "1. Installed and configured Pi-hole on ENLIL.\n\n2. Added blocklists sourced from [Firebog](https://firebog.net/)\n\n   - Selected two lists from each category:\n     * Suspicious Lists\n     * Advertising Lists\n     * Tracking and Telemetry Lists\n     * Malicious Lists\n\n3. Ran a manual Gravity update using the Pi-hole web interface.\n\n4. Added manual blocking for Facebook-related domains.\n\n5. Set upstream DNS provider to Cloudflare (temporary).",
+    "resolution": "1. Installed and configured Pi-hole on ENLIL.\n\n2. Added blocklists sourced from <a href=\"https://firebog.net/\" target=\"_blank\" rel=\"noopener\">Firebog</a>\n\n   - Selected two lists from each category:\n     * Suspicious Lists\n     * Advertising Lists\n     * Tracking and Telemetry Lists\n     * Malicious Lists\n\n3. Ran a manual Gravity update using the Pi-hole web interface.\n\n4. Added manual blocking for Facebook-related domains.\n\n5. Set upstream DNS provider to Cloudflare (temporary).",
     "metrics": {
       "total_domains_blocked": 261914,
       "total_queries": 6563,
