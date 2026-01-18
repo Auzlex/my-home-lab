@@ -28,5 +28,26 @@
       "Keep a note of this fix for future setups so it doesn’t catch you off guard.",
       "Watch for any weird behavior from cloud-init in the coming weeks."
     ]
+  },
+  {
+    "date": "2026-01-18",
+    "title": "ENLIL Pi-hole Deployment and Initial Blocklist Tuning",
+    "status": "resolved",
+    "category": "active",
+    "problem_description": "Deployment of Pi-hole on ENLIL (Raspberry Pi 1 Model B) as a dedicated network DNS and filtering node.",
+    "diagnosis_steps": "Verified Pi-hole operation via web interface and query logs.\n\n<strong>Findings:</strong>\n- Pi-hole was successfully serving DNS requests.\n- Traffic was being filtered as expected with no immediate false positives observed.",
+    "resolution": "1. Installed and configured Pi-hole on ENLIL.\n\n2. Added blocklists sourced from Firebog:\n   https://firebog.net/\n\n   - Selected two lists from each category:\n     * Suspicious Lists\n     * Advertising Lists\n     * Tracking and Telemetry Lists\n     * Malicious Lists\n\n3. Ran a manual Gravity update using the Pi-hole web interface.\n\n4. Added manual blocking for Facebook-related domains.\n\n5. Set upstream DNS provider to Cloudflare (temporary).",
+    "metrics": {
+      "total_domains_blocked": 261914,
+      "total_queries": 6563,
+      "blocked_queries": 1420,
+      "percentage_blocked": "21.6%"
+    },
+    "follow_up_notes": [
+      "Rule of thumb followed: fewer lists is better to reduce false positives.",
+      "Continue monitoring query logs for breakage or over-blocking.",
+      "Revisit upstream DNS choice later if needed.",
+      "Gradually tune blocklists instead of adding more."
+    ]
   }
 ]
