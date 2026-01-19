@@ -9,27 +9,30 @@
 
 ## Purpose
 
-**AUREL** acts as a dedicated **build worker** within the home-lab CI/CD infrastructure.
+**AUREL** acts as a dedicated **worker** within the home-lab CI/CD infrastructure.
 It is responsible for executing all heavy build and test workloads, keeping orchestration
-and scheduling separate from execution.
+and scheduling separate using docker context or manually setup SSH commands.
 
 ---
 
 ## System Information
 
-**Kernel / OS**
-- Kernel: 6.12.62+rpt-rpi-v8
-- Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18)
-- Architecture: aarch64
-- Distro: Debian (Raspberry Pi variant)
+### Kernel / OS
 
-**SSH Stack**
-- OpenSSH: OpenSSH_10.0p2 Debian-7
-- OpenSSL: 3.5.4 (30 Sep 2025)
+* Kernel: 6.12.62+rpt-rpi-v8
+* Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18)
+* Architecture: aarch64
+* Distro: Debian (Raspberry Pi variant)
 
-**Docker**
-- Docker Engine: 26.1.5+dfsg1
-- Build: a72d7cd
+### SSH Stack
+
+* OpenSSH: OpenSSH_10.0p2 Debian-7
+* OpenSSL: 3.5.4 (30 Sep 2025)
+
+### Docker
+
+* Docker Engine: 26.1.5+dfsg1
+* Build: a72d7cd
 
 ---
 
@@ -53,10 +56,10 @@ and scheduling separate from execution.
 ---
 
 ## Setup Steps
+
 We will create a user ci which will be used for build related workloads and for isolation. This user will recieve remote jobs or commands via SSH from LORIC.
 
 **AUREL** was setup using the following steps and instructions:
-
 
 ### 1. Install Docker
 

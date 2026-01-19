@@ -9,28 +9,31 @@
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)  
 
 ## Purpose
-**LORIC** acts as the dedicated **runner node** within the home-lab CI/CD infrastructure.
+
+**LORIC** acts as the dedicated **orchestrator node** within the home-lab CI/CD infrastructure.
 It is responsible for polling the Gitea server on **CASPER**, orchestrating workflow execution,
-and dispatching jobs to worker nodes like AUREL while maintaining workflow scheduling and coordination.
+and dispatching jobs to worker nodes like **AUREL** while maintaining workflow scheduling and coordination. It is also capable of handling building and running docker related tasks however those are offloaded to **AUREL**.
 
 ---
 
 ## System Information
 
-**Kernel / OS**
-- Kernel: 6.12.62+rpt-rpi-v8.
-- Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18).
-- Architecture: aarch64.
-- Distro: Debian (Raspberry Pi variant).
+### Kernel / OS
 
-**SSH Stack**
-- OpenSSH: OpenSSH_10.0p2 Debian-7.
-- OpenSSL: 3.5.4 (30 Sep 2025).
+* Kernel: 6.12.62+rpt-rpi-v8.
+* Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18).
+* Architecture: aarch64.
+* Distro: Debian (Raspberry Pi variant).
 
-**Docker**
-- Docker Engine: 26.1.5+dfsg1.
-- Build: a72d7cd.
+### SSH Stack
 
+* OpenSSH: OpenSSH_10.0p2 Debian-7.
+* OpenSSL: 3.5.4 (30 Sep 2025).
+
+### Docker
+
+* Docker Engine: 26.1.5+dfsg1.
+* Build: a72d7cd.
 
 ---
 
@@ -46,6 +49,7 @@ and dispatching jobs to worker nodes like AUREL while maintaining workflow sched
 ---
 
 ## Setup Steps
+
 **LORIC** was setup using the following steps and instructions:
 
 ### 1. Install Docker
@@ -129,7 +133,7 @@ auzlex@LORIC:~/gitea-runner $ ./act_runner daemon
 auzlex@LORIC:~ $ sudo nano /etc/systemd/system/gitea-runner.service
 ```
 
-Paste:
+2. Paste:
 
 ```ini
 [Unit]
@@ -147,7 +151,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-2. Enable and start the service:
+3. Enable and start the service:
 
 ```bash
 auzlex@LORIC:~ $ sudo systemctl daemon-reload
@@ -155,7 +159,7 @@ auzlex@LORIC:~ $ sudo systemctl enable gitea-runner
 auzlex@LORIC:~ $ sudo systemctl start gitea-runner
 ```
 
-3. Check status:
+4. Check status:
 
 ```bash
 auzlex@LORIC:~ $ sudo systemctl status gitea-runner
@@ -204,6 +208,7 @@ If the runner is busy:
 * Jobs queue in Gitea upon **CASPER**
 
 We use this command below to ensure what types of context is available.
+
 ```bash
 docker context ls
 ```
@@ -215,6 +220,7 @@ default   Current DOCKER_HOST based configuration   unix:///var/run/docker.sock
 ```
 
 Docker contexts can be created with the following command:
+
 ```bash
 docker context create aurel \
   --docker "host=ssh://ci@192.168.1.123"
@@ -231,7 +237,6 @@ After this:
 * `docker build` runs on **AUREL**.
 * `docker run` runs on **AUREL**.
 * Images and containers live on **AUREL**.
-
 
 ---
 

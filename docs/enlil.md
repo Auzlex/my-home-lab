@@ -16,18 +16,21 @@ across all devices on the home network.
 
 ## System Information
 
-**Kernel / OS**
-- Kernel: 6.12.62+rpt-rpi-v6
-- Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18)
-- Architecture: armv6l
-- Distro: Debian (Raspberry Pi variant)
+### Kernel / OS
 
-**SSH Stack**
-- OpenSSH: OpenSSH_10.0p2 Raspbian-7
-- OpenSSL: 3.5.4 (30 Sep 2025)
+* Kernel: 6.12.62+rpt-rpi-v6
+* Build: #1 SMP PREEMPT Debian 1:6.12.62-1+rpt1 (2025-12-18)
+* Architecture: armv6l
+* Distro: Debian (Raspberry Pi variant)
 
-**Pi-hole**
-- Pi-Hole: v6.3
+### SSH Stack
+
+* OpenSSH: OpenSSH_10.0p2 Raspbian-7
+* OpenSSL: 3.5.4 (30 Sep 2025)
+
+### Pi-hole
+
+* Pi-Hole: v6.3
 
 ---
 
@@ -85,6 +88,6 @@ while maintaining effective filtering, based on community recommendations from o
 
 ## Notes
 
-- Long-term DNS strategy review
-- Ongoing monitoring and tuning
-- Security hardening
+* Long-term DNS strategy review
+* Ongoing monitoring and tuning
+* Security hardening

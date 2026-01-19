@@ -17,10 +17,12 @@ CASPER is running [OpenMediaVault](https://www.openmediavault.org/) which is a n
 
 ## System Information
 
-**Kernel / OS**
-- TODO
+### Kernel / OS
 
-**Storage Configuration**
+* TODO.
+
+### Storage Configuration
+
 * **OS Drive:** 128GB SATA SSD.
 * **Data Pool:** ZFS RAID-1 with 2x 4TB HDDs.
 * **Docker Volumes:** Persistent storage for Gitea and PostgreSQL data.
