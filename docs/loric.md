@@ -129,41 +129,41 @@ auzlex@LORIC:~/gitea-runner $ ./act_runner daemon
 
 1. Create service file:
 
-```bash
-auzlex@LORIC:~ $ sudo nano /etc/systemd/system/gitea-runner.service
-```
+    ```bash
+    auzlex@LORIC:~ $ sudo nano /etc/systemd/system/gitea-runner.service
+    ```
 
 2. Paste:
 
-```ini
-[Unit]
-Description=Gitea Actions Runner
-After=network.target
+    ```ini
+    [Unit]
+    Description=Gitea Actions Runner
+    After=network.target
 
-[Service]
-Type=simple
-User=auzlex
-WorkingDirectory=/home/auzlex/gitea-runner
-ExecStart=/home/auzlex/gitea-runner/act_runner daemon
-Restart=always
+    [Service]
+    Type=simple
+    User=auzlex
+    WorkingDirectory=/home/auzlex/gitea-runner
+    ExecStart=/home/auzlex/gitea-runner/act_runner daemon
+    Restart=always
 
-[Install]
-WantedBy=multi-user.target
-```
+    [Install]
+    WantedBy=multi-user.target
+    ```
 
 3. Enable and start the service:
 
-```bash
-auzlex@LORIC:~ $ sudo systemctl daemon-reload
-auzlex@LORIC:~ $ sudo systemctl enable gitea-runner
-auzlex@LORIC:~ $ sudo systemctl start gitea-runner
-```
+    ```bash
+    auzlex@LORIC:~ $ sudo systemctl daemon-reload
+    auzlex@LORIC:~ $ sudo systemctl enable gitea-runner
+    auzlex@LORIC:~ $ sudo systemctl start gitea-runner
+    ```
 
 4. Check status:
 
-```bash
-auzlex@LORIC:~ $ sudo systemctl status gitea-runner
-```
+    ```bash
+    auzlex@LORIC:~ $ sudo systemctl status gitea-runner
+    ```
 
 ### 9. Testing Gitea Runner and worker simple via SSH
 
