@@ -75,48 +75,48 @@ This user account will be used to run ssh commands dispatched by **LORIC**. To m
 
 1. Create user with password and set shell (choose a strong password, record it for SSH key setup):
 
-```bash
-sudo useradd -m -s /bin/bash ci
-sudo passwd ci
-```
+    ```bash
+    sudo useradd -m -s /bin/bash ci
+    sudo passwd ci
+    ```
 
 2. Add user to Docker group:
 
-```bash
-sudo usermod -aG docker ci
-```
+    ```bash
+    sudo usermod -aG docker ci
+    ```
 
 3. Verify membership:
 
-```bash
-getent group docker | grep ci
-```
+    ```bash
+    getent group docker | grep ci
+    ```
 
 4. Enable SSH access:
 
-```bash
-sudo systemctl enable ssh && sudo systemctl start ssh
-```
+    ```bash
+    sudo systemctl enable ssh && sudo systemctl start ssh
+    ```
 
 5. Generate SSH key for passwordless login from LORIC:
 
-```bash
-sudo -u ci ssh-keygen -t ed25519 -C "ci@AUREL" -f /home/ci/.ssh/id_ed25519
-```
+    ```bash
+    sudo -u ci ssh-keygen -t ed25519 -C "ci@AUREL" -f /home/ci/.ssh/id_ed25519
+    ```
 
-* Copy the public key to LORIC runner or other orchestrator nodes for secure job execution.
+    * Copy the public key to LORIC runner or other orchestrator nodes for secure job execution.
 
 6. Test SSH login (password initially, then test key-based auth):
 
-```bash
-ssh ci@192.168.1.123
-```
+    ```bash
+    ssh ci@192.168.1.123
+    ```
 
 7. Verify home directory ownership:
 
-```bash
-ls -ld /home/ci
-```
+    ```bash
+    ls -ld /home/ci
+    ```
 
 ---
 
