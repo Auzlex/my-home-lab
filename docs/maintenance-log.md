@@ -1,33 +1,5 @@
-<style>
-.log-entry {
-  margin-bottom: 2rem;
-  padding: 1rem;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
 
-.log-entry h2 {
-  margin-top: 0;
-}
-
-.log-entry pre {
-  background-color: #f4f4f4;
-  padding: 10px;
-  border-radius: 3px;
-  overflow-x: auto;
-}
-
-.log-entry code {
-  background-color: #f4f4f4;
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-family: monospace;
-}
-
-.log-entry strong {
-  font-weight: bold;
-}
-</style>
+{% include maintenance-log.html %}
 
 [← Back to Home](index.md)
 
