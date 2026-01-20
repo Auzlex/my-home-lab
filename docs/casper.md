@@ -5,6 +5,7 @@
 
 * **Hostname:** CASPER
 * **IP Address:** 192.168.1.124 **(STATIC)**
+* **Assigned DNS:** 192.168.1.125 (**[ENLIL](enlil.md)**)
 * **Architecture:** x86-64 (OpenMediaVault Server)
 
 ## Purpose

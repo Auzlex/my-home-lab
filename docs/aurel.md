@@ -5,6 +5,7 @@
 
 * **Hostname:** AUREL
 * **IP Address:** 192.168.1.123 **(STATIC)**
+* **Assigned DNS:** 192.168.1.125 (**[ENLIL](enlil.md)**)
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)
 
 ## Purpose

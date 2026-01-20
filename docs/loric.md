@@ -6,6 +6,7 @@
 * **Hostname:** LORIC  
 * **Type:** Raspberry Pi 3 B+
 * **IP Address:** 192.168.1.122 **(STATIC)**
+* **Assigned DNS:** 192.168.1.125 (**[ENLIL](enlil.md)**)
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)  
 
 ## Purpose

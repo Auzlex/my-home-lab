@@ -4,6 +4,7 @@
 
 * **Hostname:** ENLIL
 * **IP Address:** 192.168.1.125 **(STATIC)**
+* **Assigned DNS:** 127.0.0.1 or localhost (**[ENLIL](enlil.md)**)
 * **Architecture:** ARMv6 (Raspberry Pi 1 Model B)
 
 ## Purpose
