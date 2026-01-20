@@ -4,7 +4,7 @@
     "title": "Configured LORIC and AUREL to Use ENLIL Pi-hole DNS",
     "status": "resolved",
     "category": "active",
-    "problem_description": "Changed the DNS resolving on Raspberry Pi nodes to target the ENLIL Pi-hole hosted on 192.168.1.125, with Cloudflare as a fallback.",
+    "problem_description": "Changed the DNS resolving on Raspberry Pi nodes to target the ENLIL Pi-hole hosted on 192.168.1.125.",
     "diagnosis_steps": "1. Verified current network connections:\n   <pre><code>nmcli connection show</code></pre>\n\n2. Updated LORIC’s Wi-Fi connection to use Pi-hole:\n   <pre><code>sudo nmcli connection modify BT-RJATFG ipv4.dns \"192.168.1.125\" ipv4.ignore-auto-dns yes && sudo nmcli connection up BT-RJATFG && cat /etc/resolv.conf</code></pre>\n\n3. Noted that our home network is on BT, which prevents directly overriding DNS for all devices. Devices currently need to be manually pointed to the Pi-hole.\n\n4. Observed connection names:\n   - LORIC: BT-RJATFG\n   - AUREL: netplan-wlan0-BT-RJATFG (likely caused by LORIC losing Wi-Fi randomly; exact cause unknown)\n\n5. Checked Docker containers, which may ignore host DNS configuration:\n   <pre><code>docker run --rm alpine cat /etc/resolv.conf</code></pre>\n\nThis ensures that containers respect the Pi-hole DNS.\n\n6. Updated devices LORIC and AUREL to follow Pi-hole settings.",
     "follow_up_notes": [
       "Monitor DNS queries via Pi-hole to confirm proper resolution and fallback behavior.",
