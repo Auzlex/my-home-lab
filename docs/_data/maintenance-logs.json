@@ -1,7 +1,7 @@
 [
   {
     "date": "2026-01-21",
-    "title": "Enforced Pi-hole DNS on All Nodes via Device Configuration",
+    "title": "Enforced Pi-hole DNS on All Nodes via Device Configuration including IPv6",
     "status": "resolved",
     "category": "active",
     "problem_description": "Ensured ENLIL, LORIC, AUREL, and Casper Raspberry Pi nodes are using the ENLIL Pi-hole as their DNS server directly on the devices rather than relying on the router settings.",
