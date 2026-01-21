@@ -5,8 +5,10 @@
 
 * **Hostname:** LORIC  
 * **Type:** Raspberry Pi 3 B+
-* **IP Address:** 192.168.1.122 **(STATIC)**
-* **Assigned DNS:** 192.168.1.125 (**[ENLIL](enlil.md)**)
+* **IPv4 Address:** `192.168.1.122` **(STATIC)**
+* **IPv6 Address:** Any/Unused **(Dynamic)**
+* **Assigned IPv4 DNS:** `192.168.1.125` (**[ENLIL](enlil.md)**)
+* **Assigned IPv6 DNS:** `2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2` (**[ENLIL](enlil.md)**)
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)  
 
 ## Purpose
@@ -14,6 +16,13 @@
 **LORIC** acts as the dedicated **orchestrator node** within the home-lab CI/CD infrastructure.
 It is responsible for polling the Gitea server on **CASPER**, orchestrating workflow execution,
 and dispatching jobs to worker nodes like **AUREL** while maintaining workflow scheduling and coordination. It is also capable of handling building and running docker related tasks however those are offloaded to **AUREL**.
+
+* **Gitea Actions Runner:** Polls **CASPER** for workflows and receives jobs.
+* **Primary Execution Node:** Executes all workflow steps locally by default.
+* **Docker Orchestrator:** Runs Docker builds on **AUREL** or **LORIC** unless a remote context or SSH is explicitly used.
+* **Persistent Service:** Runs as a systemd service and auto-starts on boot.
+* **Job Scheduling:** Single-runner execution; jobs queue in Gitea on **CASPER** if **LORIC** is busy or offline.
+* **Labels:** `pi3`, `armv7` (used only to select which workflows this runner can accept).
 
 ---
 
@@ -38,22 +47,42 @@ and dispatching jobs to worker nodes like **AUREL** while maintaining workflow s
 
 ---
 
-### Role In The Lab
-
-* **Gitea Actions Runner:** Polls **CASPER** for workflows and receives jobs.
-* **Primary Execution Node:** Executes all workflow steps locally by default.
-* **Docker Orchestrator:** Runs Docker builds on **AUREL** or **LORIC** unless a remote context or SSH is explicitly used.
-* **Persistent Service:** Runs as a systemd service and auto-starts on boot.
-* **Job Scheduling:** Single-runner execution; jobs queue in Gitea on **CASPER** if **LORIC** is busy or offline.
-* **Labels:** `pi3`, `armv7` (used only to select which workflows this runner can accept).
-
----
-
 ## Setup Steps
 
 **LORIC** was setup using the following steps and instructions:
 
-### 1. Install Docker
+### 1. Setup Network Manager CLI for LORIC
+
+We will use the following command to set a static IPv4 on our device and ensure that IPv4 and IPv6 dns are set correctly.
+
+* At the moment there is no requirement for this device to have a static IPv6 yet.
+* DNS IPs point towards **[ENLIL](enlil.md)**.
+
+```bash
+auzlex@LORIC:~ $ sudo nmcli connection modify "target connection" \
+    ipv4.addresses 192.168.1.122/24 \
+    ipv4.gateway 192.168.1.254 \
+    ipv4.dns 192.168.1.125 \
+    ipv4.ignore-auto-dns yes \
+    ipv4.method manual \
+    ipv6.dns 2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2 \
+    ipv6.ignore-auto-dns yes \
+    ipv6.method auto
+```
+
+We then apply changes by rebooting
+
+```bash
+auzlex@LORIC:~ $ sudo reboot
+```
+
+verify
+
+```bash
+auzlex@LORIC:~ $ nmcli
+```
+
+### 2. Install Docker
 
 ```bash
 auzlex@LORIC:~ $ sudo apt update && sudo apt install -y docker.io docker-compose && sudo systemctl enable docker --now
@@ -61,13 +90,13 @@ auzlex@LORIC:~ $ sudo apt update && sudo apt install -y docker.io docker-compose
 
 * Docker is used to run any containerized jobs dispatched from **CASPER** which is given via Gitea actions upon this runner node.
 
-### 2. Create Runner Directory
+### 3. Create Runner Directory
 
 ```bash
 auzlex@LORIC:~ $ mkdir ~/gitea-runner && cd ~/gitea-runner
 ```
 
-### 3. Download Gitea Actions Runner
+### 4. Download Gitea Actions Runner
 
 ```bash
 auzlex@LORIC:~/gitea-runner $ curl -LO https://dl.gitea.com/act_runner/0.2.13/act_runner-0.2.13-linux-arm-7.xz
@@ -75,7 +104,7 @@ auzlex@LORIC:~/gitea-runner $ curl -LO https://dl.gitea.com/act_runner/0.2.13/ac
 
 * Version **0.2.13**, architecture **arm-7** matches Raspberry Pi 3 B+
 
-### 4. Extract and Prepare Runner
+### 5. Extract and Prepare Runner
 
 ```bash
 auzlex@LORIC:~/gitea-runner $ unxz act_runner-0.2.13-linux-arm-7.xz

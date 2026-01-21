@@ -4,15 +4,23 @@
 # CASPER - Gitea Server & Network Attached Storage
 
 * **Hostname:** CASPER
-* **IP Address:** 192.168.1.124 **(STATIC)**
-* **Assigned DNS:** 192.168.1.125 (**[ENLIL](enlil.md)**)
+* **IPv4 Address:** 192.168.1.124 **(STATIC)**
+* **IPv6 Address:** disabled
+* **Assigned IPv4 DNS:** 192.168.1.125 (**[ENLIL](enlil.md)**)
+* **Assigned IPv6 DNS:** disabled
 * **Architecture:** x86-64 (OpenMediaVault Server)
 
 ## Purpose
 
-**CASPER** serves as the central **Gitea server** within the home-lab CI/CD infrastructure. It hosts all repositories, manages user authentication, and provides the web interface for code collaboration. Additionally, it tracks job status and logs through Gitea's integration with CI/CD runners.
+**CASPER** serves as the central **Gitea server** within the home-lab and CI/CD infrastructure. It hosts all repositories, manages user authentication, and provides the web interface for code collaboration. Additionally, it tracks job status and logs through Gitea's integration with CI/CD runners.
 
-CASPER is running [OpenMediaVault](https://www.openmediavault.org/) which is a networked attached storage solution based on Debian linux, it contains useful services that I require such as SMB and docker. A docker compose is setup and includes Traefik as a reverse proxy, Gitea for Git hosting, and PostgreSQL as the database backend. The system utilizes a ZFS pool consisting of two 4TB HDDs for data storage, while the OS runs on a 128GB SATA SSD for optimal performance.
+**CASPER** is running [OpenMediaVault](https://www.openmediavault.org/) which is a networked attached storage solution based on Debian linux, it contains useful services that I require such as SMB and docker. A docker compose is setup and includes Traefik as a reverse proxy, Gitea for Git hosting, and PostgreSQL as the database backend. The system utilizes a ZFS pool consisting of two 4TB HDDs for data storage, while the OS runs on a 128GB SATA SSD for optimal performance.
+
+* Hosts Git repositories for all projects.
+* Provides web UI for repository management and collaboration.
+* Tracks CI/CD job statuses and logs via Gitea Actions.
+* Manages user authentication and access control.
+* Serves as the central hub for workflow orchestration.
 
 ---
 
@@ -27,16 +35,6 @@ CASPER is running [OpenMediaVault](https://www.openmediavault.org/) which is a n
 * **OS Drive:** 128GB SATA SSD.
 * **Data Pool:** ZFS RAID-1 with 2x 4TB HDDs.
 * **Docker Volumes:** Persistent storage for Gitea and PostgreSQL data.
-
----
-
-## Role In The Lab
-
-* Hosts Git repositories for all projects.
-* Provides web UI for repository management and collaboration.
-* Tracks CI/CD job statuses and logs via Gitea Actions.
-* Manages user authentication and access control.
-* Serves as the central hub for workflow orchestration.
 
 ---
 

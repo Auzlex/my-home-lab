@@ -4,8 +4,10 @@
 # AUREL – Worker Node
 
 * **Hostname:** AUREL
-* **IP Address:** 192.168.1.123 **(STATIC)**
-* **Assigned DNS:** 192.168.1.125 (**[ENLIL](enlil.md)**)
+* **IPv4 Address:** `192.168.1.123` **(STATIC)**
+* **IPv6 Address:** Any/Unused **(Dynamic)**
+* **Assigned IPv4 DNS:** `192.168.1.125` (**[ENLIL](enlil.md)**)
+* **Assigned IPv6 DNS:** `2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2` (**[ENLIL](enlil.md)**)
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)
 
 ## Purpose
@@ -13,6 +15,11 @@
 **AUREL** acts as a dedicated **worker** within the home-lab CI/CD infrastructure.
 It is responsible for executing all heavy build and test workloads, keeping orchestration
 and scheduling separate using docker context or manually setup SSH commands.
+
+* Executes Docker builds and test jobs.
+* Runs ARM-native workloads.
+* Acts as a remote Docker host.
+* Receives jobs indirectly from LORIC via SSH or Docker context over SSH.
 
 ---
 
@@ -37,15 +44,6 @@ and scheduling separate using docker context or manually setup SSH commands.
 
 ---
 
-## Role In The Lab
-
-* Executes Docker builds and test jobs.
-* Runs ARM-native workloads.
-* Acts as a remote Docker host.
-* Receives jobs indirectly from LORIC via SSH or Docker context over SSH.
-
----
-
 ## Services & Packages Running
 
 * **Docker Engine** – container builds and test execution.
@@ -58,21 +56,51 @@ and scheduling separate using docker context or manually setup SSH commands.
 
 ## Setup Steps
 
-We will create a user ci which will be used for build related workloads and for isolation. This user will recieve remote jobs or commands via SSH from LORIC.
-
 **AUREL** was setup using the following steps and instructions:
 
-### 1. Install Docker
+### 1. Setup Network Manager CLI for AUREL
+
+We will use the following command to set a static IPv4 on our device and ensure that IPv4 and IPv6 dns are set correctly.
+
+* At the moment there is no requirement for this device to have a static IPv6 yet.
+* DNS IPs point towards **[ENLIL](enlil.md)**.
 
 ```bash
-auzlex@LORIC:~ $ sudo apt update && sudo apt install -y docker.io docker-compose && sudo systemctl enable docker --now
+auzlex@AUREL:~ $ sudo nmcli connection modify "target connection" \
+    ipv4.addresses 192.168.1.123/24 \
+    ipv4.gateway 192.168.1.254 \
+    ipv4.dns 192.168.1.125 \
+    ipv4.ignore-auto-dns yes \
+    ipv4.method manual \
+    ipv6.dns 2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2 \
+    ipv6.ignore-auto-dns yes \
+    ipv6.method auto
+```
+
+We then apply changes by rebooting
+
+```bash
+auzlex@AUREL:~ $ sudo reboot
+```
+
+verify
+
+```bash
+auzlex@AUREL:~ $ nmcli
+```
+
+
+### 2. Install Docker
+
+```bash
+auzlex@AUREL:~ $ sudo apt update && sudo apt install -y docker.io docker-compose && sudo systemctl enable docker --now
 ```
 
 * Docker is used to run any containerized jobs dispatched from **LORIC**.
 
-### 2. Setup SSH For Isolated CI user
+### 3. Setup SSH For Isolated CI user
 
-This user account will be used to run ssh commands dispatched by **LORIC**. To maintain isolation.
+We will create a user ci which will be used for build related workloads and for isolation. This user will recieve remote jobs or commands via SSH from **LORIC**.
 
 1. Create user with password and set shell (choose a strong password, record it for SSH key setup):
 

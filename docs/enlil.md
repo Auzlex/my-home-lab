@@ -3,15 +3,21 @@
 # ENLIL – Local DNS Resolver (Pi-hole)
 
 * **Hostname:** ENLIL
-* **IP Address:** 192.168.1.125 **(STATIC)**
-* **Assigned DNS:** 127.0.0.1 or localhost (**[ENLIL](enlil.md)**)
+* **IPv4 Address:** `192.168.1.125` **(STATIC)**
+* **IPv6 Address:** `2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2` **(STATIC)**
+* **Assigned IPv4 DNS:** obtained automatically (not to be mistaken with the pi-hole configuration dns)
+* **Assigned IPv6 DNS:** obtained automatically (not to be mistaken with the pi-hole configuration dns)
 * **Architecture:** ARMv6 (Raspberry Pi 1 Model B)
 
 ## Purpose
 
-**ENLIL** acts as a dedicated **network services node** within the home-lab infrastructure.
-It runs Pi-hole, providing network-wide ad blocking, DNS sinkholing, and improved privacy
-across all devices on the home network.
+**ENLIL** is our DNS resolver within the home-lab. It currently runs Pi-hole, providing network-wide ad blocking, DNS sinkholing, and improved privacy across all devices on the home network.
+
+* Provides network-wide ad blocking and DNS services
+* Acts as primary DNS server for the home network
+* Hosts web interface for Pi-hole administration
+* Improves privacy and reduces unnecessary network traffic
+* Serves as centralized network filtering solution
 
 ---
 
@@ -35,13 +41,39 @@ across all devices on the home network.
 
 ---
 
-## Role In The Lab
+## Setup Steps
 
-* Provides network-wide ad blocking and DNS services
-* Acts as primary DNS server for the home network
-* Hosts web interface for Pi-hole administration
-* Improves privacy and reduces unnecessary network traffic
-* Serves as centralized network filtering solution
+**ENLIL** was setup using the following steps and instructions:
+
+### 1. Setup Network Manager CLI for ENLIL
+
+We will use the following command to set a static IPv4 and IPV6 on our device.
+
+```bash
+auzlex@ENLIL:~ $ sudo nmcli connection modify "target connection" \
+    ipv4.addresses 192.168.1.125/24 \
+    ipv4.method manual \
+    ipv6.addresses 2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2/64 \
+    ipv6.method manual
+```
+
+We then apply changes by rebooting
+
+```bash
+auzlex@ENLIL:~ $ sudo reboot
+```
+
+verify
+
+```bash
+auzlex@ENLIL:~ $ nmcli connection show "target connection"
+```
+
+### 2. Setup Pi-hole
+
+```bash
+auzlex@ENLIL:~ $ curl -sSL https://install.pi-hole.net | bash
+```
 
 ---
 

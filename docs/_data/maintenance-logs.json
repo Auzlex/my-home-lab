@@ -1,5 +1,18 @@
 [
   {
+    "date": "2026-01-21",
+    "title": "Enforced Pi-hole DNS on All Nodes via Device Configuration",
+    "status": "resolved",
+    "category": "active",
+    "problem_description": "Ensured ENLIL, LORIC, AUREL, and Casper Raspberry Pi nodes are using the ENLIL Pi-hole as their DNS server directly on the devices rather than relying on the router settings.",
+    "diagnosis_steps": "1. Checked current DNS settings on all nodes:\n   <pre><code>nmcli device show</code></pre>\n\n2. Applied Pi-hole DNS directly to each connection profile using nmcli:\n   <pre><code>sudo nmcli connection modify <connection> ipv4.dns \"192.168.1.125\" ipv4.ignore-auto-dns yes && sudo nmcli connection up <connection></code></pre>\n\n3. Verified /etc/resolv.conf on each node reflected Pi-hole as primary DNS:\n   <pre><code>cat /etc/resolv.conf</code></pre>\n\n4. Confirmed all nodes resolved domains correctly and queries appeared in Pi-hole logs.",
+    "follow_up_notes": [
+      "Monitor Pi-hole query logs to ensure all devices consistently use it for DNS resolution.",
+      "Document any new connection profiles that may appear to ensure they also point to Pi-hole.",
+      "Verify Docker containers respect the device DNS settings for consistency."
+    ]
+  },
+  {
     "date": "2026-01-19",
     "title": "Configured LORIC and AUREL to Use ENLIL Pi-hole DNS",
     "status": "resolved",
