@@ -5,7 +5,7 @@
     "status": "resolved",
     "category": "active",
     "problem_description": "Ensured ENLIL, LORIC, AUREL, and Casper Raspberry Pi nodes are using the ENLIL Pi-hole as their DNS server directly on the devices rather than relying on the router settings.",
-    "diagnosis_steps": "1. Checked current DNS settings on all nodes:\n   <pre><code>nmcli device show</code></pre>\n\n2. Applied Pi-hole DNS directly to each connection profile using nmcli:\n   <pre><code>sudo nmcli connection modify <connection> ipv4.dns \"192.168.1.125\" ipv4.ignore-auto-dns yes ipv6.ignore-aut-dns yes ipv4.dns \"2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2\" && sudo nmcli connection up <connection></code></pre>\n\n3. Verified on each device to see Pi-hole as primary DNS:\n   <pre><code>nmcli connection show target_name</code></pre>\n\n4. Confirmed all nodes resolved domains correctly and queries appeared in Pi-hole logs.",
+    "diagnosis_steps": "1. Checked current DNS settings on all nodes:\n   <pre><code>nmcli device show</code></pre>\n\n2. Applied Pi-hole DNS directly to each connection profile using nmcli:\n   <pre><code>sudo nmcli connection modify <connection> ipv4.dns \"192.168.1.125\" ipv4.ignore-auto-dns yes ipv6.ignore-aut-dns yes ipv4.dns \"2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2\"</code></pre>\n\n3. Verified on each device to see Pi-hole as primary DNS:\n   <pre><code>nmcli connection show target_name</code></pre>\n\n4. Confirmed all nodes resolved domains correctly and queries appeared in Pi-hole logs.",
     "follow_up_notes": [
       "Monitor Pi-hole query logs to ensure all devices consistently use it for DNS resolution.",
       "Document any new connection profiles that may appear to ensure they also point to Pi-hole.",
