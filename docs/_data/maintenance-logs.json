@@ -1,5 +1,18 @@
 [
   {
+    "date": "2026-01-25",
+    "title": "Updated Pi-hole Gravity and Added Meta Quest Blocklists",
+    "status": "resolved",
+    "category": "active",
+    "problem_description": "Performed a Pi-hole gravity update and added DNS blocklists to prevent Meta Quest Pro devices from contacting Meta services, including firmware update and advertising endpoints. The Meta Quest Pro is discontinued, and updates are intentionally blocked at the DNS level.",
+    "diagnosis_steps": "1. Ran a Pi-hole gravity update to refresh all blocklists:\n   <pre><code>pihole -g</code></pre>\n\n2. Added the Meta Quest firmware update blocklist:\n   <pre><code>https://raw.githubusercontent.com/ibrah3m/pihole-meta-quest-blocklist/main/hosts-firmware</code></pre>\n\n3. Added the Meta Quest ads blocklist:\n   <pre><code>https://raw.githubusercontent.com/ibrah3m/pihole-meta-quest-blocklist/main/hosts-ads</code></pre>\n\n4. Confirmed domains were blocked via Pi-hole query logs when the Meta Quest Pro attempted outbound connections.",
+    "follow_up_notes": [
+      "Monitor Pi-hole logs to ensure Meta-related domains remain blocked.",
+      "Review blocklists periodically for updates or changes.",
+      "Be aware that blocking firmware endpoints may affect certain online features or services."
+    ]
+  },
+  {
     "date": "2026-01-21",
     "title": "Enforced Pi-hole DNS on All Nodes via Device Configuration including IPv6",
     "status": "resolved",
