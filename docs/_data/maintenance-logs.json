@@ -1,5 +1,18 @@
 [
   {
+  "date": "2026-02-05",
+  "title": "Pi-hole Lost Internet Due to Missing Default Gateway in NetworkManager",
+  "status": "resolved",
+  "category": "active",
+  "problem_description": "Devices using Pi-hole DNS lost internet connectivity. The Pi-hole host could communicate with local network devices but could not reach external addresses such as 1.1.1.1. Investigation showed the system had a static IPv4 address configured via NetworkManager (nmcli), but no IPv4 gateway was defined. As a result, no default route existed and the system could not reach upstream DNS servers.",
+  "diagnosis_steps": "1. Confirmed Pi-hole host had a valid local IP address (192.168.1.125) on interface eth0.\n\n2. Tested connectivity to the router:\n   <pre><code>ping 192.168.1.1</code></pre>\n   Result: Successful.\n\n3. Tested external connectivity:\n   <pre><code>ping 1.1.1.1</code></pre>\n   Result: Failed.\n\n4. Inspected routing table:\n   <pre><code>ip route</code></pre>\n   Output showed only the local network route:\n   <pre><code>192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.125 metric 100</code></pre>\n   The expected default route (default via 192.168.1.1) was missing.\n\n5. Temporarily restored connectivity by adding a default route manually:\n   <pre><code>sudo ip route add default via 192.168.1.1</code></pre>\n\n6. Identified root cause: the NetworkManager connection used manual IPv4 configuration but did not define an ipv4.gateway value.\n\n7. Permanently fixed the issue by adding the gateway to the nmcli connection:\n   <pre><code>nmcli connection modify <connection-name> ipv4.gateway 192.168.1.1\nnmcli connection up <connection-name></code></pre>",
+  "follow_up_notes": [
+    "Ensure all manual IPv4 configurations include ipv4.addresses, ipv4.gateway, and ipv4.method manual.",
+    "Verify routing after network changes using 'ip route'.",
+    "Consider documenting nmcli network configuration to avoid missing gateway parameters in the future."
+  ]
+},
+  {
     "date": "2026-01-25",
     "title": "Updated Pi-hole Gravity and Added Meta Quest Blocklists",
     "status": "resolved",
