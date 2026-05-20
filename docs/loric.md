@@ -1,7 +1,9 @@
 
 [← Back to Home](index.md)
 
-# LORIC - Orchestrator Node (Gitea)
+# ~~LORIC - Orchestrator Node (Gitea)~~ - **RETIRED**
+
+**Status:** This system has been retired as part of the MK-1 to MK-2 homelab transition. Documentation is retained for archival purposes.
 
 * **Hostname:** LORIC  
 * **Type:** Raspberry Pi 3 B+

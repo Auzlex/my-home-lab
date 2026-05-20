@@ -1,28 +1,44 @@
 # My Home Lab Documentation
 
-This project documents a my multi-node CI/CD or general home lab using:
+This project documents my home lab infrastructure dedicated to **data privacy** and **digital autonomy**. The core purpose is to escape reliance on detached mainstream corporations and reclaim control over my personal data and services by hosting them myself.
 
-- Gitea
-- Docker
-- Raspberry Pi
-- Pi Hole
-- ARM + x86 computers
+## Current Setup (MK-2)
 
-The goal is to understand and develop skills for real-world CI/CD infrastructure upon re-used electronic waste or old hardware around me. And Improve my documentation skills for projects that expand in scope beyond what my memory can retain.
+The home lab has been reformed into a **cleaner, unified architecture** built around a single high-performance computer that runs core services. Access to services is provided through:
 
-## Architecture Diagram
+- **Tailscale** - Secure mesh networking to access services remotely
+- **Headscale** - Self-hosted Tailscale control server on my VPS
+- **ACRO** - Authorization and authentication system (similar to Authentik but with greater code-level control)
+- **Domain Protection** - Services delivered through my domain with ACRO-protected access
+
+This approach provides granular control, privacy, and security while maintaining ease of access.
+
+## Architecture Diagram (MK-2 - Current)
+
+{% include image-modal-mk2.html %}
+
+{% include image-viewer-mk2.js %}
+
+This diagram shows the current MK-2 architecture with the unified compute node, Tailscale mesh networking, Headscale control plane, and ACRO authorization layer.
+
+## Architecture Diagram (MK-1 - Retired)
 
 {% include image-modal.html %}
 
 {% include image-viewer.js %}
 
-In the diagram above, you can see a simple architecture/setup of various computer devices that I setup on my network. In this example you can see the devices **ENLIL**, **CASPER**, **LORIC**, **AUREL** and **LABRYS**.
+**Note:** The diagram below shows the original MK-1 architecture and is no longer active. See the retired nodes section below.
 
-This is my MK-1 "home-lab" a simple manual orchestration setup. to understand the fundamentals in what goes into these automated systems.
+### Retired Systems (MK-1)
 
-I have a runner node with an optional worker node which can be sent tasks via shell in ssh. Currently LORIC handles all jobs dispatched by casper via gitea workflows and will offload its building and docker related activities to AUREL. All gitea workflow jobs are handled by 2 seperate computers.
+The original setup consisted of multiple distributed nodes:
+- ~~**ENLIL**~~ - **RETIRED** - Was a local DNS resolver running Pi-hole
+- **CASPER** - Still active as NAS storage
+- ~~**LORIC**~~ - **RETIRED** - Was the orchestrator/CI/CD runner node
+- ~~**AUREL**~~ - **RETIRED** - Was the worker node for heavy builds
+- **LABRYS** - Workstation
 
-My next goals is to expand the workers and determine where certain offloaded tasks should be determined and handled. I will also look into the use of kubernetes with slightly more powerful devices.
+The MK-1 architecture was a valuable learning experience for understanding distributed CI/CD infrastructure, but has been consolidated into the cleaner MK-2 single-computer design focused on privacy and control.
 
 ## Notes
 
@@ -30,8 +46,11 @@ My next goals is to expand the workers and determine where certain offloaded tas
 
 ## Documentation Pages
 
+### Active Systems
 - [CASPER - Gitea Server & Network Attached Storage](casper.md)
-- [LORIC - Orchestrator Node](loric.md)
-- [AUREL - Worker Node](aurel.md)
-- [ENLIL - Local DNS Resolver](enlil.md)
 - [Maintenance Log](maintenance-log.md)
+
+### Retired Systems (MK-1 Archive)
+- [LORIC - Orchestrator Node (Retired)](loric.md)
+- [AUREL - Worker Node (Retired)](aurel.md)
+- [ENLIL - Local DNS Resolver (Retired)](enlil.md)

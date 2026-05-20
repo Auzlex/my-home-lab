@@ -1,7 +1,9 @@
 
 [← Back to Home](index.md)
 
-# AUREL – Worker Node
+# ~~AUREL – Worker Node~~ - **RETIRED**
+
+**Status:** This system has been retired as part of the MK-1 to MK-2 homelab transition. Documentation is retained for archival purposes.
 
 * **Hostname:** AUREL
 * **IPv4 Address:** `192.168.1.123` **(STATIC)**

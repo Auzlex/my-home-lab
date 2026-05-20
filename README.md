@@ -1,19 +1,36 @@
 # My Home Lab
 ## Introduction
 
-Welcome to the My Home Lab repository. The documentation includes setup guides, configurations, and architecture details for my benefit so that I can remember what I did and how I did it, documentation may not be perfect or consistently updated!
+Welcome to the My Home Lab repository. This documents my infrastructure dedicated to **data privacy** and **digital autonomy**—escaping reliance on mainstream corporations and reclaiming control over my personal data by hosting services myself.
 
-## Architecture Diagram
+## Current Architecture (MK-2)
+
+The home lab has been reformed into a **unified, privacy-focused architecture** built around a single high-performance computer:
+
+- **Services** run on a dedicated compute system
+- **Access** is provided securely through **Tailscale** mesh networking
+- **Control plane** is self-hosted via **Headscale** on my VPS
+- **Authorization** is managed by **ACRO** (similar to Authentik, with deeper code-level control)
+- **Domain protection** via my domain with ACRO-secured access
+
+This approach provides granular control, privacy, and security while maintaining ease and reliability.
+
+## Legacy Architecture (MK-1 - Archived)
+
+### Original Setup
 
 ![alt text](docs/resources/myhomelab.png)
 
-In the diagram above, you can see a simple architecture/setup of various computer devices that I setup on my network. In this example you can see the devices **ENLIL**, **CASPER**, **LORIC**, **AUREL** and **LABRYS**.
+**Note:** This diagram shows the original MK-1 setup and is no longer active.
 
-This is my MK-1 "home-lab" a simple manual orchestration setup. to understand the fundamentals in what goes into these automated systems.
+The original setup featured multiple distributed nodes for learning purposes:
+- ~~**ENLIL**~~ - **RETIRED** - Local DNS resolver with Pi-hole
+- **CASPER** - NAS storage (still active)
+- ~~**LORIC**~~ - **RETIRED** - Orchestrator node and CI/CD runner
+- ~~**AUREL**~~ - **RETIRED** - Worker node for heavy builds
+- **LABRYS** - Storage device
 
-I have a runner node with an optional worker node which can be sent tasks via shell in ssh. Currently LORIC handles all jobs dispatched by casper via gitea workflows and will offload its building and docker related activities to AUREL. All gitea workflow jobs are handled by 2 seperate computers.
-
-My next goals is to expand the workers and determine where certain offloaded tasks should be determined and handled. I will also look into the use of kubernetes with slightly more powerful devices.
+MK-1 was valuable for understanding distributed CI/CD infrastructure, but has been consolidated into the cleaner MK-2 design.
 
 ## Notes
 

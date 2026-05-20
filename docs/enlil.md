@@ -1,6 +1,8 @@
 [← Back to Home](index.md)
 
-# ENLIL – Local DNS Resolver (Pi-hole)
+# ~~ENLIL – Local DNS Resolver (Pi-hole)~~ - **RETIRED**
+
+**Status:** This system has been retired as part of the MK-1 to MK-2 homelab transition. Documentation is retained for archival purposes.
 
 * **Hostname:** ENLIL
 * **IPv4 Address:** `192.168.1.125` **(STATIC)**
