@@ -1,7 +1,7 @@
 # My Home Lab
 ## Introduction
 
-Welcome to the My Home Lab repository. This documents my infrastructure dedicated to **data privacy** and **digital autonomy**—escaping reliance on mainstream corporations and reclaiming control over my personal data by hosting services myself.
+Welcome to the My Home Lab repository. This project documents my home lab — a personal infrastructure built around data privacy and digital autonomy. Rather than handing control of my data to third-party platforms, I self-host the services I rely on daily, keeping everything under my own roof. It's a living system that grows as I do, and this site exists as both a reference for myself and a transparent look at how it all fits together.
 
 ## Current Architecture (MK-2)
 
