@@ -25,17 +25,17 @@ Another core service is my self-hosted **Gitea** instance, which acts as the cen
 
 ## Architecture Diagram (MK-2 - Current)
 
-{% include image-modal-mk2.html %}
-
-{% include image-viewer-mk2.js %}
+<div style="text-align: center;">
+  <img src="resources/myhomelab.png" alt="Home Lab Architecture MK-2" class="zoomable-image" style="max-width: 100%;">
+</div>
 
 This diagram shows the current MK-2 architecture with the unified compute node, Tailscale mesh networking, Headscale control plane, and ACRO authorization layer.
 
 ## Architecture Diagram (MK-1 - Retired)
 
-{% include image-modal.html %}
-
-{% include image-viewer.js %}
+<div style="text-align: center;">
+  <img src="resources/myoldhomelab.png" alt="Home Lab Architecture MK-1" class="zoomable-image" style="max-width: 100%;">
+</div>
 
 **Note:** The diagram below shows the original MK-1 architecture and is no longer active. See the retired nodes section below.
 
@@ -64,3 +64,5 @@ The MK-1 architecture was a valuable learning experience for understanding distr
 - [LORIC - Orchestrator Node (Retired)](loric.md)
 - [AUREL - Worker Node (Retired)](aurel.md)
 - [ENLIL - Local DNS Resolver (Retired)](enlil.md)
+
+{% include image-viewer-shared.html %}

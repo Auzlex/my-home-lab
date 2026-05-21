@@ -1,9 +1,57 @@
+<!-- Single shared modal container for all zoomable images -->
+<div id="universal-image-modal" class="modal">
+  <span class="close-modal">&times;</span>
+  <img class="modal-content" id="universal-modal-image">
+</div>
+
+<style>
+/* Modal CSS */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 50px;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 900px;
+  cursor: grab;
+  transform-origin: center center;
+  transition: transform 0.05s linear;
+}
+
+.modal-content:active { cursor: grabbing; }
+
+.close-modal {
+  position: absolute;
+  top: 15px; right: 35px;
+  color: #f1f1f1; font-size: 40px; font-weight: bold;
+  transition: 0.3s; cursor: pointer;
+  z-index: 1001;
+}
+.close-modal:hover, .close-modal:focus { color: #bbb; }
+
+.zoomable-image {
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.zoomable-image:hover {
+  opacity: 0.8;
+}
+</style>
+
 <script>
 (function() {
-  var modal = document.getElementById('image-modal');
-  var img = document.getElementById('architecture-image');
-  var modalImg = document.getElementById('modal-image');
-  var span = document.getElementsByClassName('close')[0];
+  var modal = document.getElementById('universal-image-modal');
+  var modalImg = document.getElementById('universal-modal-image');
+  var closeBtn = document.querySelector('.close-modal');
 
   var scale = 1;
   var panning = false;
@@ -22,36 +70,42 @@
     setTransform();
   }
 
-  img.onclick = function(){
+  function openModal(src) {
     modal.style.display = 'block';
-    modalImg.src = this.src;
+    modalImg.src = src;
     resetZoom();
-  };
+  }
 
-  span.onclick = function() {
+  function closeModal() {
     modal.style.display = 'none';
     resetZoom();
-  };
+  }
 
+  // Attach click to all zoomable images
+  var images = document.querySelectorAll('.zoomable-image');
+  images.forEach(function(img) {
+    img.addEventListener('click', function() {
+      openModal(this.src);
+    });
+  });
+
+  closeBtn.onclick = closeModal;
   modal.onclick = function(event) {
     if (event.target === modal) {
-      modal.style.display = 'none';
-      resetZoom();
+      closeModal();
     }
   };
 
-  // Wheel: zoom relative to image center (no pointer-based offset)
+  // Zoom
   modalImg.onwheel = function(event) {
     event.preventDefault();
-    var delta = -event.deltaY; // positive when scrolling up
+    var delta = -event.deltaY;
     var factor = delta > 0 ? 1.2 : 1 / 1.2;
-    var newScale = Math.max(0.5, Math.min(5, scale * factor));
-    scale = newScale;
-    // transform-origin is center, so no need to compute complex offsets
+    scale = Math.max(0.5, Math.min(5, scale * factor));
     setTransform();
   };
 
-  // Panning (drag)
+  // Panning
   modalImg.onmousedown = function(event) {
     event.preventDefault();
     panning = true;
@@ -62,59 +116,45 @@
     panning = false;
   });
 
-  modalImg.onmousemove = function(event) {
+  window.addEventListener('mousemove', function(event) {
     if (!panning) return;
     event.preventDefault();
     pointX = (event.clientX - start.x);
     pointY = (event.clientY - start.y);
     setTransform();
-  };
+  });
 
-  // Touch support: single-finger pan, two-finger pinch (basic)
-  var touchState = { lastDist: null, lastCenter: null };
-
+  // Basic touch support
+  var touchState = { lastDist: null };
   function distance(a, b) {
     var dx = a.clientX - b.clientX;
     var dy = a.clientY - b.clientY;
     return Math.sqrt(dx*dx + dy*dy);
   }
 
-  function centerPoint(a, b) {
-    return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
-  }
-
   modalImg.addEventListener('touchstart', function(e) {
     if (e.touches.length === 1) {
-      // pan start
-      var t = e.touches[0];
       panning = true;
-      start = { x: t.clientX - pointX, y: t.clientY - pointY };
+      start = { x: e.touches[0].clientX - pointX, y: e.touches[0].clientY - pointY };
     } else if (e.touches.length === 2) {
-      // pinch start
       touchState.lastDist = distance(e.touches[0], e.touches[1]);
-      touchState.lastCenter = centerPoint(e.touches[0], e.touches[1]);
     }
   }, { passive: false });
 
   modalImg.addEventListener('touchmove', function(e) {
     e.preventDefault();
     if (e.touches.length === 1 && panning) {
-      var t = e.touches[0];
-      pointX = (t.clientX - start.x);
-      pointY = (t.clientY - start.y);
+      pointX = (e.touches[0].clientX - start.x);
+      pointY = (e.touches[0].clientY - start.y);
       setTransform();
     } else if (e.touches.length === 2) {
       var dist = distance(e.touches[0], e.touches[1]);
-      var center = centerPoint(e.touches[0], e.touches[1]);
       if (touchState.lastDist) {
         var factor = dist / touchState.lastDist;
-        var newScale = Math.max(0.5, Math.min(5, scale * factor));
-        scale = newScale;
-        // keep current translation; transform-origin center will handle the rest
+        scale = Math.max(0.5, Math.min(5, scale * factor));
         setTransform();
       }
       touchState.lastDist = dist;
-      touchState.lastCenter = center;
     }
   }, { passive: false });
 

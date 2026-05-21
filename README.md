@@ -5,6 +5,8 @@ Welcome to the My Home Lab repository. This project documents my home lab, a per
 
 ## Current Architecture (MK-2)
 
+![Current Architecture](docs/resources/myhomelab.png)
+
 The home lab has been reformed into a **unified, privacy-focused architecture** built around a single high-performance computer:
 
 - **Services** run on a dedicated compute system
@@ -29,7 +31,7 @@ Another core service is my self-hosted **Gitea** instance, which acts as the cen
 
 ### Original Setup
 
-![alt text](docs/resources/myhomelab.png)
+![Legacy Architecture](docs/resources/myoldhomelab.png)
 
 **Note:** This diagram shows the original MK-1 setup and is no longer active.
 
