@@ -5,7 +5,7 @@
 
 * **Hostname:** CASPER
 * **IPv4 Address:** 192.168.1.124 **(STATIC)**
-* **IPv6 Address:** disabled
+* **IPv6 Address:** 2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2 **(STATIC)**
 * **Assigned IPv4 DNS:** 192.168.1.124 (**Itself - Pi-hole**)
 * **Assigned IPv6 DNS:** disabled
 * **Architecture:** x86-64 (OpenMediaVault Server)
