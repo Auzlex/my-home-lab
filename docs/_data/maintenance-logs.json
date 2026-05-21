@@ -1,5 +1,43 @@
 [
   {
+    "date": "2026-05-08",
+    "title": "System Stability Confirmed",
+    "status": "resolved",
+    "category": "active",
+    "problem_description": "Monitoring the Ryzen NAS after the Global C-States fix was applied to ensure the freeze/sleep issues were fully resolved.",
+    "diagnosis_steps": "N/A",
+    "resolution": "After several tests and a long period of uptime, system stability has been confirmed. The C-States fix successfully prevented the system from entering unrecoverable sleep states.",
+    "follow_up_notes": [
+      "Continue normal operations and monitor if any other Ryzen 1st gen quirks arise."
+    ]
+  },
+  {
+    "date": "2026-05-05",
+    "title": "Resolved Global C-States Sleep Issue on Ryzen",
+    "status": "resolved",
+    "category": "active",
+    "problem_description": "The system would occasionally enter a sleep state from which it could not awake, requiring a hard reset. This is a known issue with first-generation Ryzen processors and Linux.",
+    "diagnosis_steps": "Investigated system logs leading up to freezes. Identified that the freezes occurred during idle periods, pointing towards power management and C-States.",
+    "resolution": "Disabled Global C-States in the BIOS/UEFI settings, which prevents the CPU from entering the low-power sleep states that cause the system to hang.",
+    "follow_up_notes": [
+      "Monitor system stability over the coming weeks.",
+      "Check if disabling C-States impacts power consumption significantly."
+    ]
+  },
+  {
+    "date": "2026-05-04",
+    "title": "Hardware Upgrade & OMV8 Migration",
+    "status": "resolved",
+    "category": "active",
+    "problem_description": "The NAS (Casper) needed more computing power for handling all tasks including CI/CD and self-hosted services.",
+    "diagnosis_steps": "N/A",
+    "resolution": "Rebuilt the NAS hardware from an old AMD A10-7700K processor to an AMD Ryzen 1700 (repurposed old hardware) on AM4 using 16GB of DDR4 (previously 8GB of DDR3). Upgraded the OS drive from a 128GB SATA SSD to a 256GB NVMe SSD, and added two 1TB HDDs in a new ZFS pool called 'casper-buffer'. During the hardware upgrade, upgraded from OMV7 to OMV8. Successfully exported and reimported the ZFS pools, and reassigned/setup the Gitea server. Added a local Gitea runner called 'casper-runner' to handle all CI/CD tasks with the new hardware capabilities.",
+    "follow_up_notes": [
+      "Monitor system performance with the new Ryzen hardware.",
+      "Ensure all Gitea Actions workflows run smoothly on casper-runner."
+    ]
+  },
+  {
   "date": "2026-02-05",
   "title": "Pi-hole Lost Internet Due to Missing Default Gateway in NetworkManager",
   "status": "resolved",

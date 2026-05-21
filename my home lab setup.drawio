@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36">
   <diagram name="Page-1" id="KQaZ9sGM0VNIyPZshfia">
-    <mxGraphModel dx="2493" dy="2067" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3132" dy="2443" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -352,7 +352,7 @@
         <mxCell id="qinz0pNPPj---MqdPIqG-29" parent="RQzp1xr_66jK9CDO3Djb-21" style="swimlane;whiteSpace=wrap;html=1;startSize=20;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="DOCKER COMPOSE CADDY" vertex="1">
           <mxGeometry height="60" width="280" x="20" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="qinz0pNPPj---MqdPIqG-30" parent="qinz0pNPPj---MqdPIqG-29" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" value="&lt;b&gt;CADDY WEB SERVER&lt;/b&gt;" vertex="1">
+        <mxCell id="qinz0pNPPj---MqdPIqG-30" parent="qinz0pNPPj---MqdPIqG-29" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" value="&lt;b&gt;CADDY REVERSE PROXY&lt;/b&gt;" vertex="1">
           <mxGeometry height="40" width="280" y="20" as="geometry" />
         </mxCell>
         <mxCell id="qinz0pNPPj---MqdPIqG-31" edge="1" parent="RQzp1xr_66jK9CDO3Djb-21" source="qinz0pNPPj---MqdPIqG-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="qinz0pNPPj---MqdPIqG-6">
@@ -363,13 +363,16 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="qinz0pNPPj---MqdPIqG-35" edge="1" parent="1" source="qinz0pNPPj---MqdPIqG-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#f0a30a;strokeColor=#BD7000;" target="qinz0pNPPj---MqdPIqG-4">
+        <mxCell id="qinz0pNPPj---MqdPIqG-45" edge="1" parent="RQzp1xr_66jK9CDO3Djb-21" source="qinz0pNPPj---MqdPIqG-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="qinz0pNPPj---MqdPIqG-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qinz0pNPPj---MqdPIqG-35" edge="1" parent="1" source="qinz0pNPPj---MqdPIqG-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#f0a30a;strokeColor=#BD7000;" target="qinz0pNPPj---MqdPIqG-30">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="970" y="560" />
-              <mxPoint x="970" y="-110" />
+              <mxPoint x="930" y="560" />
+              <mxPoint x="930" y="-110" />
               <mxPoint x="-30" y="-110" />
-              <mxPoint x="-30" y="540" />
+              <mxPoint x="-30" y="400" />
             </Array>
           </mxGeometry>
         </mxCell>
