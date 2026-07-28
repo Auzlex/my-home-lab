@@ -7,9 +7,9 @@
 
 * **Hostname:** LORIC  
 * **Type:** Raspberry Pi 3 B+
-* **IPv4 Address:** `192.168.1.122` **(STATIC)**
+* **IPv4 Address:** `192.168.0.122` **(STATIC)**
 * **IPv6 Address:** Any/Unused **(Dynamic)**
-* **Assigned IPv4 DNS:** `192.168.1.125` (**[ENLIL](enlil.md)**)
+* **Assigned IPv4 DNS:** `192.168.0.125` (**[ENLIL](enlil.md)**)
 * **Assigned IPv6 DNS:** `2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2` (**[ENLIL](enlil.md)**)
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)  
 
@@ -62,9 +62,9 @@ We will use the following command to set a static IPv4 on our device and ensure 
 
 ```bash
 auzlex@LORIC:~ $ sudo nmcli connection modify "target connection" \
-    ipv4.addresses 192.168.1.122/24 \
-    ipv4.gateway 192.168.1.254 \
-    ipv4.dns 192.168.1.125 \
+    ipv4.addresses 192.168.0.122/24 \
+    ipv4.gateway 192.168.0.254 \
+    ipv4.dns 192.168.0.125 \
     ipv4.ignore-auto-dns yes \
     ipv4.method manual \
     ipv6.dns 2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2 \
@@ -125,8 +125,8 @@ auzlex@LORIC:~ $ sudo nano /etc/cloud/cloud.cfg
 
 * Set `manage_etc_hosts: false` in the configuration.
 
-* Then, edit `/etc/cloud/templates/hosts.debian.tmpl` to allow LORIC to resolve `192.168.1.124`:
-(This one is important because I have gitea working under reverse proxy via traefik so I need `http://192.168.1.124:8083`).
+* Then, edit `/etc/cloud/templates/hosts.debian.tmpl` to allow LORIC to resolve `192.168.0.124`:
+(This one is important because I have gitea working under reverse proxy via traefik so I need `http://192.168.0.124:8083`).
 
 ```bash
 auzlex@LORIC:~ $ sudo nano /etc/cloud/templates/hosts.debian.tmpl
@@ -135,7 +135,7 @@ auzlex@LORIC:~ $ sudo nano /etc/cloud/templates/hosts.debian.tmpl
 * Add:
 
 ```
-192.168.1.124 192.168.1.124
+192.168.0.124 192.168.0.124
 ``` -->
 
 ### 6. Register Runner with Gitea
@@ -143,7 +143,7 @@ auzlex@LORIC:~ $ sudo nano /etc/cloud/templates/hosts.debian.tmpl
 * Obtain the **registration token** from CASPER (Gitea UI: Settings → Actions → Runners → Add Runner).
 
 ```bash
-auzlex@LORIC:~/gitea-runner $ ./act_runner register --instance http://192.168.1.124:8083 --token <TOKEN> --name loric-runner --labels pi3,armv7 --no-interactive
+auzlex@LORIC:~/gitea-runner $ ./act_runner register --instance http://192.168.0.124:8083 --token <TOKEN> --name loric-runner --labels pi3,armv7 --no-interactive
 ```
 
 * `<TOKEN>`: token obtained from CASPER.
@@ -219,7 +219,7 @@ jobs:
     runs-on: pi3  # label matches LORIC and AUREL worker
     steps:
       - name: Echo from Worker
-        run: ssh ci@192.168.1.123 'echo "Hello from AUREL!"'
+        run: ssh ci@192.168.0.123 'echo "Hello from AUREL!"'
 
 ```
 
@@ -247,7 +247,7 @@ docker context ls
 
 ```bash
 NAME      DESCRIPTION                               DOCKER ENDPOINT               ERROR
-aurel *                                             ssh://ci@192.168.1.123        
+aurel *                                             ssh://ci@192.168.0.123        
 default   Current DOCKER_HOST based configuration   unix:///var/run/docker.sock  
 ```
 
@@ -255,7 +255,7 @@ Docker contexts can be created with the following command:
 
 ```bash
 docker context create aurel \
-  --docker "host=ssh://ci@192.168.1.123"
+  --docker "host=ssh://ci@192.168.0.123"
 ```
 
 Next we tell **LORIC** to use **AUREL** for docker usage.
@@ -275,6 +275,6 @@ After this:
 ## Notes
 
 * **CASPER** never talks to workers directly; all execution flows through **LORIC**.
-<!-- * Ensure `/etc/hosts` entry for `192.168.1.124` remains in place for DNS resolution. -->
+<!-- * Ensure `/etc/hosts` entry for `192.168.0.124` remains in place for DNS resolution. -->
 * Runner binary located at: `~/gitea-runner/act_runner`.
 * Docker must remain installed and updated for workflows that use containerized jobs.

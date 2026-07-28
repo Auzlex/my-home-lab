@@ -6,9 +6,9 @@
 **Status:** This system has been retired as part of the MK-1 to MK-2 homelab transition. Documentation is retained for archival purposes.
 
 * **Hostname:** AUREL
-* **IPv4 Address:** `192.168.1.123` **(STATIC)**
+* **IPv4 Address:** `192.168.0.123` **(STATIC)**
 * **IPv6 Address:** Any/Unused **(Dynamic)**
-* **Assigned IPv4 DNS:** `192.168.1.125` (**[ENLIL](enlil.md)**)
+* **Assigned IPv4 DNS:** `192.168.0.125` (**[ENLIL](enlil.md)**)
 * **Assigned IPv6 DNS:** `2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2` (**[ENLIL](enlil.md)**)
 * **Architecture:** ARMv7 (Raspberry Pi 3 B+)
 
@@ -69,9 +69,9 @@ We will use the following command to set a static IPv4 on our device and ensure 
 
 ```bash
 auzlex@AUREL:~ $ sudo nmcli connection modify "target connection" \
-    ipv4.addresses 192.168.1.123/24 \
-    ipv4.gateway 192.168.1.254 \
-    ipv4.dns 192.168.1.125 \
+    ipv4.addresses 192.168.0.123/24 \
+    ipv4.gateway 192.168.0.254 \
+    ipv4.dns 192.168.0.125 \
     ipv4.ignore-auto-dns yes \
     ipv4.method manual \
     ipv6.dns 2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2 \
@@ -140,7 +140,7 @@ We will create a user ci which will be used for build related workloads and for 
 6. Test SSH login (password initially, then test key-based auth):
 
     ```bash
-    ssh ci@192.168.1.123
+    ssh ci@192.168.0.123
     ```
 
 7. Verify home directory ownership:

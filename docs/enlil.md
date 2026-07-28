@@ -5,7 +5,7 @@
 **Status:** This system has been retired as part of the MK-1 to MK-2 homelab transition. Documentation is retained for archival purposes.
 
 * **Hostname:** ENLIL
-* **IPv4 Address:** `192.168.1.125` **(STATIC)**
+* **IPv4 Address:** `192.168.0.125` **(STATIC)**
 * **IPv6 Address:** `2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2` **(STATIC)**
 * **Assigned IPv4 DNS:** obtained automatically (not to be mistaken with the pi-hole configuration dns)
 * **Assigned IPv6 DNS:** obtained automatically (not to be mistaken with the pi-hole configuration dns)
@@ -53,7 +53,7 @@ We will use the following command to set a static IPv4 and IPV6 on our device.
 
 ```bash
 auzlex@ENLIL:~ $ sudo nmcli connection modify "target connection" \
-    ipv4.addresses 192.168.1.125/24 \
+    ipv4.addresses 192.168.0.125/24 \
     ipv4.method manual \
     ipv6.addresses 2a00:23c7:593:6501:ba27:ebff:fe0f:e3f2/64 \
     ipv6.method manual

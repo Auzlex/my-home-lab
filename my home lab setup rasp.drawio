@@ -4,7 +4,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="aDozoBHbgmbNClyULeUd-84" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="AUREL@&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;192.168.1.123 (WORKER)&lt;/span&gt;" vertex="1">
+        <mxCell id="aDozoBHbgmbNClyULeUd-84" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="AUREL@&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;192.168.0.123 (WORKER)&lt;/span&gt;" vertex="1">
           <mxGeometry height="560" width="400" x="1360" y="40" as="geometry" />
         </mxCell>
         <mxCell id="aDozoBHbgmbNClyULeUd-115" parent="aDozoBHbgmbNClyULeUd-84" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="STORAGE" vertex="1">
@@ -34,7 +34,7 @@
         <mxCell id="fbhYTWKZqsOjxwU_Kk2A-14" parent="aDozoBHbgmbNClyULeUd-84" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#be3956, #954641);strokeColor=light-dark(#be3956, #b3746d);fontColor=light-dark(#FFFFFF,#DBABAB);" value="&lt;b&gt;RASPBIAN&lt;/b&gt;" vertex="1">
           <mxGeometry height="40" width="320" x="40" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="aDozoBHbgmbNClyULeUd-104" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="LORIC@&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;192.168.1.122 (RUNNER)&lt;/span&gt;" vertex="1">
+        <mxCell id="aDozoBHbgmbNClyULeUd-104" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="LORIC@&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;192.168.0.122 (RUNNER)&lt;/span&gt;" vertex="1">
           <mxGeometry height="560" width="400" x="920" y="40" as="geometry" />
         </mxCell>
         <mxCell id="aDozoBHbgmbNClyULeUd-125" parent="aDozoBHbgmbNClyULeUd-104" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="STORAGE" vertex="1">
@@ -49,7 +49,7 @@
         <mxCell id="aDozoBHbgmbNClyULeUd-130" parent="aDozoBHbgmbNClyULeUd-138" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="loric-runner | v0.2.13 | global | pi3 armv7" vertex="1">
           <mxGeometry height="40" width="320" y="100" as="geometry" />
         </mxCell>
-        <mxCell id="aDozoBHbgmbNClyULeUd-132" parent="aDozoBHbgmbNClyULeUd-138" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;SSH CI@192.168.1.123&lt;/b&gt;" vertex="1">
+        <mxCell id="aDozoBHbgmbNClyULeUd-132" parent="aDozoBHbgmbNClyULeUd-138" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;SSH CI@192.168.0.123&lt;/b&gt;" vertex="1">
           <mxGeometry height="40" width="320" y="60" as="geometry" />
         </mxCell>
         <mxCell id="aDozoBHbgmbNClyULeUd-127" parent="aDozoBHbgmbNClyULeUd-138" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;GITEA-ARMV7 RUNNER&lt;/b&gt;" vertex="1">
@@ -89,7 +89,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="fbhYTWKZqsOjxwU_Kk2A-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="ENLIL@&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;192.168.1.125 (PI HOLE)&lt;/span&gt;" vertex="1">
+        <mxCell id="fbhYTWKZqsOjxwU_Kk2A-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="ENLIL@&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;192.168.0.125 (PI HOLE)&lt;/span&gt;" vertex="1">
           <mxGeometry height="560" width="400" x="-400" y="40" as="geometry" />
         </mxCell>
         <mxCell id="fbhYTWKZqsOjxwU_Kk2A-2" parent="fbhYTWKZqsOjxwU_Kk2A-1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="STORAGE" vertex="1">
@@ -172,7 +172,7 @@
             <mxPoint x="720" y="790" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="aDozoBHbgmbNClyULeUd-30" parent="RQzp1xr_66jK9CDO3Djb-54" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="CASPER@192.168.1.124" vertex="1">
+        <mxCell id="aDozoBHbgmbNClyULeUd-30" parent="RQzp1xr_66jK9CDO3Djb-54" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="CASPER@192.168.0.124" vertex="1">
           <mxGeometry height="1060" width="840" x="480" y="60" as="geometry" />
         </mxCell>
         <mxCell id="aDozoBHbgmbNClyULeUd-36" parent="aDozoBHbgmbNClyULeUd-30" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;DOCKER&lt;/b&gt;" vertex="1">

@@ -52,7 +52,7 @@
         <mxCell id="fbhYTWKZqsOjxwU_Kk2A-22" parent="fbhYTWKZqsOjxwU_Kk2A-17" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" value="&lt;b&gt;WINDOWS&lt;/b&gt;" vertex="1">
           <mxGeometry height="40" width="520" x="40" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="aDozoBHbgmbNClyULeUd-30" parent="RQzp1xr_66jK9CDO3Djb-54" style="swimlane;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" value="CASPER@192.168.1.124" vertex="1">
+        <mxCell id="aDozoBHbgmbNClyULeUd-30" parent="RQzp1xr_66jK9CDO3Djb-54" style="swimlane;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" value="CASPER@192.168.0.124" vertex="1">
           <mxGeometry height="1000" width="840" x="40" y="60" as="geometry" />
         </mxCell>
         <mxCell id="aDozoBHbgmbNClyULeUd-36" parent="aDozoBHbgmbNClyULeUd-30" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;DOCKER&lt;/b&gt;" vertex="1">
