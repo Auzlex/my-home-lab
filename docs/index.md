@@ -7,7 +7,8 @@ This project documents my home lab, a personal infrastructure built around data 
 The home lab has been reformed into a **cleaner, unified architecture** built around a single high-performance computer that runs core services. Access to services is provided through:
 
 - **Tailscale** - Secure mesh networking to access services remotely
-- **Headscale** - Self-hosted Tailscale control server on my VPS
+- **Headscale** - Self-hosted Tailscale control server running on **VIREN** (OVH VPS)
+- **VIREN** - Public-facing OVH VPS; acts as reverse proxy, authorization gateway, and frontend host
 - **ACRO** - Authorization and authentication system (similar to Authentik but with greater code-level control)
 - **Domain Protection** - Services delivered through my domain with ACRO-protected access
 
@@ -58,6 +59,7 @@ The MK-1 architecture was a valuable learning experience for understanding distr
 
 ### Active Systems
 - [CASPER - Gitea Server & Network Attached Storage](casper.md)
+- [VIREN - OVH VPS / Reverse Proxy & Web Frontend Host](viren.md)
 - [Maintenance Log](maintenance-log.md)
 
 ### Retired Systems (MK-1 Archive)
