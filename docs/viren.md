@@ -64,8 +64,8 @@ In addition to proxying, VIREN hosts **web-based frontends and portfolio service
 * Edge authorization via ACRO prevents unauthorized access to proxied services.
 * `nofail` mount policy enforced in `/etc/fstab` for any optional/removable mounts — see incident log for context.
 * Container root filesystems configured as read-only with ephemeral write paths isolated to tmpfs mounts.
-* TLS trust store hardening and system CA enforcement across containerized runtimes.
-* Web server request-filtering controls deployed for interim mitigation of unpatched upstream vulnerabilities.
+* System CA trust store updated on host and imported into containers via read-only volume mounts with system/OpenSSL CA enforcement.
+* Legacy PHP web server container decommissioned and taken down until further notice following disclosed core RCE vulnerabilities; active web frontends operate on patched Node 24 runtimes.
 
 ---
 
